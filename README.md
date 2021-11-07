@@ -6,6 +6,10 @@
 
 <h2>Front-End: Angular8 e Bootstrap5</h2>
 
+<h2>Projeto de meu estudo com rest dando os primeiros passos com Angular, este projeto pode servir de estudo para quem ta tentando aprender spring em rest e angular</h2>
+
+<h2>Para seguir deve-se ter configurado no computador o jdk(11 preferencia), o maven(3.8 de preferencia) e banco de dados PostgreSQL</h2>
+
 <h3>Criando Banco de Dados:</h3>
 CREATE DATABASE "rest-api-angular"
   WITH OWNER = postgres<br>
