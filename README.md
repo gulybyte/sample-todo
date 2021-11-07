@@ -1,11 +1,11 @@
 <h1>API REST MINI GERENCIADOR DE TAREFAS</h1>
-<br><br>
+
 <h2>Banco de dados: PostgreSQL</h2>
-<br>
+
 <h2>Back-End: Spring</h2>
-<br>
+
 <h2>Front-End: Angular8 e Bootstrap5</h2>
-<br>
+
 <h3>Criando Banco de Dados:</h3>
 CREATE DATABASE "rest-api-angular"
   WITH OWNER = postgres<br>
