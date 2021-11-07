@@ -1,0 +1,46 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand">Gerenciador simples de tarefas</a>
+</nav>
+<div class="container mt-4">
+    <h3>Crie, conclua ou delete uma tarefa</h3>
+    <hr />
+    <form [formGroup]="form" (ngSubmit)="submit()" >
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" class="form-control" formControlName="description" />
+            </div>
+            <div class="col-md-1">
+                <button type="submit" [disabled]="!form.get('description').valid" 
+                        class="btn btn-primary">Add
+                </button>
+            </div>
+        </div>
+    </form>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="list-group">
+                <li *ngFor="let todo of todos" 
+                    class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="{{ todo.done ? 'done' : '' }}">
+                        {{ todo.description }} 
+                        <span class="{{ todo.done ? 'c' : ''}}">
+                            <span class="w-mil">*** (tarefa criada em: {{ todo.createdDate }})</span>
+                        </span>
+                        <span class="{{ todo.done ? '' : 'c'}}">
+                            <span class="w-mil">*** (tarefa concluida em: {{ todo.doneDate }})</span>
+                        </span>
+                    </span>
+                    <div class="btn-group">
+                        <button class="btn btn-success" 
+                                [disabled]="todo.done" 
+                                (click)="done(todo)">
+                            Concluir Tarefa
+                        </button>
+                        <button class="btn btn-danger" (click)="delete(todo)" >Deletar</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
