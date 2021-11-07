@@ -1,5 +1,6 @@
 <h3>o src e apenas o nosso codico fonte, mais sera presico aqui instalar o projeto, siga os passos de auxilio</h3>
 
+<h4>Passo 0: para seguir para os proximos passos tem que ter o angular8 instalado, no README do diretorio inicial deste repositorio tem os passos ensinando como instalar</h4>
 <h4>Passo 1: abra o terminal no diretorio ui</h4>
 cd caminho-ate-onde-esta-o-projeto/api-gerenciamento-de-tarefas/ui
 <h4>Passo 2: estando no diretorio ui crie o projeto</h4>
@@ -18,7 +19,7 @@ npm install --save bootstrap
               "./node_modules/bootstrap/dist/css/bootstrap.min.css" <br>
             ],</p>
             
-<h4>Passo 6: Delete o src do seu projeto angular e substitua por este que esta no aqui no github</h4>
+<h4>Passo 6: Delete o src do seu projeto angular e substitua por este que esta no aqui no repositorio</h4>
 
 <h4>7º e ultimo passo e so dar start</h4>
 para isso no terminal estando dentro do projeto apenas escreva o comando 'ng serve', se seguiu os passos corretamente ele ira demorar um pouquinho mas ja ira startar, lembrando que pra funcionar corretamente a api também tem que estar "startada" e funcionando corretamente conectada no banco de dados, se nao tem certeza ou não sabe como dar start na api, la dentro do diretorio da api tem um README ensinando
