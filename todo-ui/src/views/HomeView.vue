@@ -1,21 +1,26 @@
 <template>
-
-    <InputText v-model="inputText" type="text" style="width: 100%;" />
-
-    <Button label="Salvar" @click="increment"
-      :disabled="inputText === ''"></Button>
-    {{ count }}
-
+  <div>
+    <InputText v-model="description" type="text" style="width: 100%;" />
+    <Button label="Salvar" @click="postData" :disabled="description === ''"></Button>
+  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 
-const count = ref(0)
-const inputText = ref('')
+const description = ref('')
 
-function increment() {
-  count.value++
+async function postData() {
+
+  if (description.value !== '') {
+    const response = await fetch('http://localhost:8080/api-rest/todos/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 'description': description.value })
+    })
+  }
 }
 
 </script>
