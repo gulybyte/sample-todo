@@ -8,15 +8,15 @@
     <div class="card">
       <DataTable :value="todos" tableStyle="min-width: 50rem">
         <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header">
-          <template #body="TETE">
+          <template #body="rowData">
             <template v-if="col.field === 'id'">
-              <Button @click="markAsDone(TETE.data.id)"><i class="pi pi-check"></i></Button>
+              <Button class="mark-done-button" @click="markAsDone(rowData.data.id)"><i class="pi pi-check"></i></Button>
             </template>
             <template v-if="col.field === 'description'">
-              {{ TETE.data.description }}
+              {{ rowData.data.description }}
             </template>
             <template v-if="col.field === 'createdDate'">
-              {{ TETE.data.createdDate  }}
+              {{ rowData.data.createdDate  }}
             </template>
           </template>
         </Column>
@@ -80,3 +80,10 @@ async function postData() {
 
 onMounted(fetchData)
 </script>
+
+<style>
+.mark-done-button {
+  background-color: rgb(34, 220, 27);
+  border: rgb(9, 255, 0);
+}
+</style>
