@@ -1,26 +1,28 @@
 <template>
-  <div>
-    <InputText v-model="description" type="text" style="width: 100%;" />
-    <Button label="Salvar" @click="postData" :disabled="description === ''"></Button>
-  </div>
+
+  <InputText v-model="description" type="text" style="width: 100%;" />
+
+    <Button label="Salvar" @click="postData"
+      :disabled="description === ''"></Button>
+
 </template>
+
+
 
 <script setup>
 import { ref } from 'vue'
 
-const description = ref('')
+  const URL = 'http://localhost:8080/api-rest/todos/'
+  const HEADERS = { 'Content-Type': 'application/json' }
 
-async function postData() {
+  const description = ref('')
 
-  if (description.value !== '') {
-    const response = await fetch('http://localhost:8080/api-rest/todos/', {
+  async function postData()
+  {
+    await fetch(URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({ 'description': description.value })
     })
   }
-}
-
 </script>
