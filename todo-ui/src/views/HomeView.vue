@@ -5,14 +5,17 @@
     <Button label="Salvar" @click="postData" :disabled="description === ''"></Button>
 
     <div class="card">
-      <DataTable :value="products" tableStyle="min-width: 50rem">
+      <DataTable :value="todos" tableStyle="min-width: 50rem">
         <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header">
-          <template #body>
+          <template #body="TETE">
             <template v-if="col.field === 'id'">
-              <Button>{{ col.field }}</Button>
+              <Button @click="deleteData(TETE.data.id)"><i class="pi pi-check"></i></Button>
             </template>
-            <template v-else>
-              {{ col.field }}
+            <template v-if="col.field === 'description'">
+              {{ TETE.data.description }}
+            </template>
+            <template v-if="col.field === 'createdDate'">
+              {{ TETE.data.createdDate  }}
             </template>
           </template>
         </Column>
@@ -32,7 +35,7 @@ const URL = 'http://localhost:8080/api-rest/todos/'
 const HEADERS = { 'Content-Type': 'application/json' }
 
 const description = ref('')
-const products = ref([])
+const todos = ref([])
 
 
 const columns = [
@@ -46,8 +49,16 @@ const columns = [
 async function fetchData() {
   const response = await fetch(URL)
   if (response.ok) {
-    products.value = await response.json()
+    todos.value = await response.json()
   }
+}
+
+
+
+async function deleteData(id) {
+  alert(URL+id+'/done')
+  await fetch(URL+id+'/done', {method: "PATCH"})
+  fetchData()
 }
 
 
