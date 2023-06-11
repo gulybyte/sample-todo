@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +52,12 @@ public class Controller {
 		return repository.findAllWithMarkDone(page);
 	}
 
+
+	@DeleteMapping("{id}")
+	public void deleteByIdWithMarkDone(@PathVariable Long id) {
+		if(repository.findById(id).get().getDone())
+			repository.deleteById(id);
+	}
 
 
 	@PatchMapping("{id}/done")

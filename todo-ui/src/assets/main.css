@@ -18,4 +18,5 @@
     padding-left: 1rem;
 } .router-link-active, .router-link-exact-active {
     color: rgb(179, 97, 255) !important;
+    text-decoration: underline !important;
 }
