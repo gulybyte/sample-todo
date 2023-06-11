@@ -1,3 +1,7 @@
+@import "primevue/resources/themes/lara-dark-purple/theme.css";
+
+@import "primevue/resources/primevue.min.css";
+
 * {
   margin: 0;
   padding: 0;
