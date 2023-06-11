@@ -34,8 +34,13 @@ public class Controller {
 
 
 	@GetMapping
-	public List<Todo> findAll(){
+	public List<Todo> findAllWithoutMarkDone(){
 		return repository.findAllWithoutMarkDone();
+	}
+
+	@GetMapping("finalized")
+	public List<Todo> findAllWithMarkDone(){
+		return repository.findAllWithMarkDone();
 	}
 
 

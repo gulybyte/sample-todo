@@ -15,4 +15,7 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
     @Query(value = "select c from Todo c where c.done = false")
 	List<Todo> findAllWithoutMarkDone();
 
+    @Query(value = "select c from Todo c where c.done = true")
+	List<Todo> findAllWithMarkDone();
+
 }
