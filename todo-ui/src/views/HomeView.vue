@@ -1,6 +1,6 @@
 <template>
 
-  <InputText v-model="description" type="text" style="width: 100%;" />
+  <InputText v-model="description" type="text" style="width: 100%; margin-bottom: 0.5rem;" />
 
     <Button label="Salvar" @click="postData"
       :disabled="description === ''"></Button>
