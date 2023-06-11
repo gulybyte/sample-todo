@@ -56,22 +56,25 @@ async function fetchData() {
 
 
 async function deleteData(id) {
-  alert(URL+id+'/done')
-  await fetch(URL+id+'/done', {method: "PATCH"})
+
+  const URL_DELETE_DATA = `${URL+id}/done`
+
+  await fetch(URL_DELETE_DATA, {method: "PATCH"})
+
   fetchData()
 }
 
 
 
 async function postData() {
-  if (description.value !== '') {
-    await fetch(URL, {
-      method: 'POST',
-      headers: HEADERS,
-      body: JSON.stringify({ 'description': description.value })
-    })
-    fetchData()
-  }
+  await fetch(URL,
+  {
+    method: 'POST',
+    headers: HEADERS,
+    body: JSON.stringify({ 'description': description.value })
+  })
+
+  fetchData()
 }
 
 onMounted(fetchData)
