@@ -29,7 +29,8 @@ public class Controller {
 
 
 	@PostMapping
-	public Todo save( @RequestBody Todo todo ) {
+	public Todo save(@RequestBody Todo todo) {
+		if (todo.getDone() == null) todo.setDone(false);
 		return repository.save(todo);
 	}
 
