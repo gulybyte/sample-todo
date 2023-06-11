@@ -47,7 +47,7 @@ public class Controller {
 	public Page<List<Todo>>  findAllWithMarkDone(
 			@RequestParam(value = "page", required = false, defaultValue = "0") int pageNumber) {
 
-		var page = PageRequest.of(pageNumber, 5, Sort.Direction.DESC, "id");
+		var page = PageRequest.of(pageNumber, 5, Sort.Direction.DESC, "doneDate");
 
 		return repository.findAllWithMarkDone(page);
 	}
