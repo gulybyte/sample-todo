@@ -2,8 +2,11 @@
   <h1 class="mb-05rem">Tarefas Anteriormente Concluidas</h1>
 
   <div class="card">
-    <DataTable :value="todos" tableStyle="min-width: 50rem">
+    <DataTable :value="todos.content" tableStyle="min-width: 50rem">
       <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header"></Column>
+      <!-- <Column field="description" header="Descrição"></Column>
+      <Column field="createdDate" header="Data Criação"></Column>
+      <Column field="doneDate" header="Data Finalização"></Column> -->
     </DataTable>
   </div>
 
