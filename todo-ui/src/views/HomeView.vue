@@ -83,7 +83,7 @@ onMounted(fetchData)
 
 <style>
 .mark-done-button {
-  background-color: rgb(34, 220, 27);
-  border: rgb(9, 255, 0);
+  background-color: rgb(0, 38, 255);
+  border: none;
 }
 </style>

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ReportView from '../views/ReportView.vue'
+import TableReportView from '../views/TableReportView.vue'
 
 
 const router = createRouter({
@@ -15,6 +16,11 @@ const router = createRouter({
       path: '/report',
       name: 'report',
       component: ReportView
+    },
+    {
+      path: '/report/table',
+      name: 'table',
+      component: TableReportView
     }
   ]
 })
