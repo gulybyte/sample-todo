@@ -35,23 +35,16 @@ public class Controller {
 	}
 
 
+
 	@GetMapping
-	public List<Todo> getAll(){
-		return repository.findAll();
+	public List<Todo> findAll(){
+		return repository.findAllWithoutMarkDone();
 	}
 
-	@GetMapping("{id}")
-	public Todo getById(@PathVariable Long id) {
-		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-	}
 
-	@DeleteMapping("{id}")
-	public void delete(@PathVariable Long id) {
-		repository.deleteById(id);
-	}
 
 	@PatchMapping("{id}/done")
-	public Todo markAsDone( @PathVariable Long id) {
+	public Todo markAsDone(@PathVariable Long id) {
 		return repository.findById(id).map(todo -> {
 			todo.setDone(true);
 			todo.setDoneDate(LocalDateTime.now());
@@ -59,5 +52,5 @@ public class Controller {
 			return todo;
 		}).orElse(null);
 	}
-	
+
 }

@@ -9,7 +9,7 @@
         <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header">
           <template #body="TETE">
             <template v-if="col.field === 'id'">
-              <Button @click="deleteData(TETE.data.id)"><i class="pi pi-check"></i></Button>
+              <Button @click="markAsDone(TETE.data.id)"><i class="pi pi-check"></i></Button>
             </template>
             <template v-if="col.field === 'description'">
               {{ TETE.data.description }}
@@ -55,7 +55,7 @@ async function fetchData() {
 
 
 
-async function deleteData(id) {
+async function markAsDone(id) {
 
   const URL_DELETE_DATA = `${URL+id}/done`
 
