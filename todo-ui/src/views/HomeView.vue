@@ -1,8 +1,9 @@
 <template>
   <div>
-    <InputText v-model="description" type="text" style="width: 100%; margin-bottom: 0.5rem;" />
+    <InputText v-model="description" type="text" style="width: 100%;" class="mb-05rem" />
 
-    <Button label="Salvar" @click="postData" :disabled="description === ''"></Button>
+    <Button label="Salvar" @click="postData" :disabled="description === ''"
+      class="mb-05rem" style="margin-bottom: 0.5rem;"></Button>
 
     <div class="card">
       <DataTable :value="todos" tableStyle="min-width: 50rem">
@@ -41,7 +42,7 @@ const todos = ref([])
 const columns = [
   { field: 'description', header: 'Descrição' },
   { field: 'createdDate', header: 'Data Criação' },
-  { field: 'id', header: 'Editar' },
+  { field: 'id', header: 'Concluir' },
 ];
 
 

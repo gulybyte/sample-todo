@@ -2,5 +2,20 @@
 
 .container-main {
     margin: 1rem auto;
-    width: 92%;
+    width: 85%;
+}
+
+.section-nav {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+} .section-nav> a {
+    color: rgb(97, 255, 97);
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: large;
+    padding-left: 1rem;
+} .router-link-active, .router-link-exact-active {
+    color: rgb(179, 97, 255) !important;
 }

@@ -12,4 +12,13 @@ body {
   height: 100%;
   background-image: url('image.webp');
   background-size: 100%;
+  background-attachment: fixed;
 }
+
+.mb-05rem {
+  margin-bottom: 0.5rem;
+}
+
+body::-webkit-scrollbar-track{background: #060D15  }
+body::-webkit-scrollbar{width: 7px;}
+body::-webkit-scrollbar-thumb{ background-color: rgb(111, 0, 255) ; }
