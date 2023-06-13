@@ -17,6 +17,6 @@
     font-size: large;
     padding-left: 1rem;
 } .router-link-active, .router-link-exact-active {
-    color: rgb(179, 97, 255) !important;
+    color: rgb(255, 200, 0) !important;
     text-decoration: underline !important;
 }

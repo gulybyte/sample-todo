@@ -75,6 +75,8 @@ async function postData() {
     body: JSON.stringify({ 'description': description.value })
   })
 
+  description.value = ''
+
   fetchData()
 }
 
