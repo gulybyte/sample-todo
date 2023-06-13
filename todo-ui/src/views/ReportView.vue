@@ -5,6 +5,6 @@ import HeaderReport from '../components/HeaderReport.vue'
 <template>
 
 <HeaderReport></HeaderReport>
-asd
+Em breve Graficos de "produtividade"... Estou juntando dados para analisar e ver quais serão graficos e querys nescessarias
 
 </template>

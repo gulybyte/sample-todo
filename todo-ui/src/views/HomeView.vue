@@ -6,7 +6,7 @@
       class="mb-05rem" style="margin-bottom: 0.5rem;"></Button>
 
     <div class="card">
-      <DataTable :value="todos" tableStyle="min-width: 50rem">
+      <DataTable :value="todos" tableStyle="min-width: 50rem" stripedRows>
         <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header">
           <template #body="rowData">
             <template v-if="col.field === 'id'">
