@@ -43,6 +43,8 @@ public class Controller {
 		return repository.findAllWithoutMarkDone();
 	}
 
+
+
 	@GetMapping("finalized")
 	public Page<List<Todo>>  findAllWithMarkDone(
 			@RequestParam(value = "page", required = false, defaultValue = "0") int pageNumber) {
@@ -53,11 +55,14 @@ public class Controller {
 	}
 
 
+
 	@DeleteMapping("{id}")
 	public void deleteByIdWithMarkDone(@PathVariable Long id) {
-		if(repository.findById(id).get().getDone())
-			repository.deleteById(id);
+		if(repository.findById(id).get().getDone()) {
+            repository.deleteById(id);
+        }
 	}
+
 
 
 	@PatchMapping("{id}/done")
@@ -65,6 +70,17 @@ public class Controller {
 		return repository.findById(id).map(todo -> {
 			todo.setDone(true);
 			todo.setDoneDate(LocalDateTime.now());
+			repository.save(todo);
+			return todo;
+		}).orElse(null);
+	}
+
+
+
+    @PatchMapping("{id}/order")
+	public Todo changeOrderById(@PathVariable Long id) {
+		return repository.findById(id).map(todo -> {
+			todo.setOrderTodo(LocalDateTime.now());
 			repository.save(todo);
 			return todo;
 		}).orElse(null);

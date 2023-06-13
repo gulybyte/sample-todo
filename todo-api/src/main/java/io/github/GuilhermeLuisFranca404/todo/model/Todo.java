@@ -26,7 +26,7 @@ public class Todo {
 
 	@Column
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private LocalDateTime createdDate, doneDate;
+	private LocalDateTime createdDate, doneDate, orderTodo;
 
 
 	public Long getId() {
@@ -59,9 +59,18 @@ public class Todo {
 	public void setDoneDate(LocalDateTime doneDate) {
 		this.doneDate = doneDate;
 	}
+    public LocalDateTime getOrderTodo() {
+        return orderTodo;
+    }
+    public void setOrderTodo(LocalDateTime orderTodo) {
+        this.orderTodo = orderTodo;
+    }
 
 	@PrePersist
-	public void beforaSave() {
-		setCreatedDate(LocalDateTime.now());
+	public void beforeSave() {
+        final var DATE_TIME_NOW = LocalDateTime.now();
+		setCreatedDate(DATE_TIME_NOW);
+		setOrderTodo(DATE_TIME_NOW);
 	}
+
 }
