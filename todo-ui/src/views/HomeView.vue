@@ -18,6 +18,9 @@
             <template v-if="col.field === 'createdDate'">
               {{ rowData.data.createdDate  }}
             </template>
+            <template v-if="col.field === 'orderTodo'">
+              <Button class="change-order-button" @click="changeOrderById(rowData.data.id)"><i class="pi pi-angle-double-up"></i></Button>
+            </template>
           </template>
         </Column>
       </DataTable>
@@ -43,6 +46,7 @@ const columns = [
   { field: 'description', header: 'Descrição' },
   { field: 'createdDate', header: 'Data Criação' },
   { field: 'id', header: 'Concluir' },
+  { field: 'orderTodo', header: 'Ordem' },
 ];
 
 
@@ -61,6 +65,17 @@ async function markAsDone(id) {
   const URL_DELETE_DATA = `${URL+id}/done`
 
   await fetch(URL_DELETE_DATA, {method: "PATCH"})
+
+  fetchData()
+}
+
+
+
+async function changeOrderById(id) {
+
+  const URL_ORDER_DATA = `${URL+id}/order`
+
+  await fetch(URL_ORDER_DATA, {method: "PATCH"})
 
   fetchData()
 }
@@ -86,6 +101,9 @@ onMounted(fetchData)
 <style>
 .mark-done-button {
   background-color: rgb(0, 38, 255);
+  border: none;
+} .change-order-button {
+  background-color: rgb(208, 255, 0);
   border: none;
 }
 </style>
