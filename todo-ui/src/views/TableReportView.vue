@@ -14,7 +14,7 @@
             {{ rowData.data.createdDate  }}
           </template>
           <template v-if="col.field === 'doneDate'">
-            {{ rowData.data.createdDate  }}
+            {{ rowData.data.doneDate  }}
           </template>
           <template v-if="col.field === 'id'">
             <Button class="trash-button" @click="deleteById(rowData.data.id)"><i class="pi pi-trash"></i></Button>
