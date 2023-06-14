@@ -9,13 +9,15 @@
     position: fixed;
     bottom: 1rem;
     right: 1rem;
+    background-color: #040D19;
+    padding: 1rem 1.8rem;
+    border-radius: 5rem;
 } .section-nav> a {
     color: rgb(64, 214, 255);
     font-weight: bold;
     text-decoration: none;
     cursor: pointer;
     font-size: large;
-    padding-left: 1rem;
 } .router-link-active, .router-link-exact-active {
     color: rgb(255, 200, 0) !important;
     text-decoration: underline !important;

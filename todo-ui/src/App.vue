@@ -9,7 +9,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
     <nav class="section-nav">
       <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/report">Relatorio</RouterLink>
+      <RouterLink to="/report" style="padding-left: 1rem;">Relatorio</RouterLink>
     </nav>
 
   </div>
