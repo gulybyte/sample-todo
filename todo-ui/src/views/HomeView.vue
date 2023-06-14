@@ -44,8 +44,8 @@ const todos = ref([])
 
 const columns = [
   { field: 'description', header: 'Descrição' },
-  { field: 'createdDate', header: 'Data Criação' },
   { field: 'id', header: 'Concluir' },
+  { field: 'createdDate', header: 'Data Criação' },
   { field: 'orderTodo', header: 'Ordem' },
 ];
 
