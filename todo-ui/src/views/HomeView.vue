@@ -16,7 +16,7 @@
               {{ rowData.data.description }}
             </template>
             <template v-if="col.field === 'createdDate'">
-              {{ rowData.data.createdDate  }}
+              {{ removeYear(rowData.data.createdDate) }}
             </template>
             <template v-if="col.field === 'orderTodo'">
               <Button class="change-order-button" @click="changeOrderById(rowData.data.id)"><i class="pi pi-angle-double-up"></i></Button>
@@ -40,6 +40,14 @@ const HEADERS = { 'Content-Type': 'application/json' }
 
 const description = ref('')
 const todos = ref([])
+
+
+function removeYear(value) {
+  const [data, hora] = value.split(' ');
+  const [dia, mes] = data.split('/');
+
+  return `${hora}  ${dia}/${mes}`;
+}
 
 
 const columns = [
