@@ -155,6 +155,22 @@ class ServiceTodoTest {
     }
 
 
+    @Test
+    void whenUndoneMarkAsDoneThenBodyIsObjectTodoAndDoneIsFalseAndDoneDateIsNull() {
+
+        when(repository.findById(anyLong())).thenReturn(optionalTodo);
+
+        var response = service.undoneMarkAsDone(ID);
+
+        assertNotNull(response);
+        assertEquals(todo.getClass(), response.getClass());
+
+        assertEquals(false, response.getDone());
+        assertNull(response.getDoneDate());
+
+        testAttrsTodoObjEqualsResponseBody(response, true, true, false, true, false, true);
+
+    }
 
 
 

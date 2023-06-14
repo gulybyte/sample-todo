@@ -16,7 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import io.github.GuilhermeLuisFranca404.todo.model.Todo;
-import io.github.GuilhermeLuisFranca404.todo.service.impl.ServiceTodoImpl;
+import io.github.GuilhermeLuisFranca404.todo.service.ServiceTodo;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -41,7 +41,7 @@ public class ControllerTodoTest {
     private ControllerTodo controller;
 
     @Mock
-    private ServiceTodoImpl service;
+    private ServiceTodo service;
 
     @BeforeEach
     void setUp() {
@@ -164,6 +164,24 @@ public class ControllerTodoTest {
 
     }
 
+
+    @Test
+    void whenUndoneMarkAsDoneThenReturnSuccessAndBodyIsTodo() {
+
+        when(service.undoneMarkAsDone(ID)).thenReturn(todo);
+
+        var response = controller.undoneMarkAsDone(ID);
+        var responseBody = response.getBody();
+
+        assertNotNull(response);
+        assertNotNull(responseBody);
+        assertEquals(todo, responseBody);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(ResponseEntity.class, response.getClass());
+
+        testAllAttrsTodoObjEqualsResponseBody(responseBody);
+
+    }
 
 
 
