@@ -65,4 +65,15 @@ public class ServiceTodoImpl implements ServiceTodo {
         }).orElse(null);
     }
 
+
+    @Override
+    public Todo undoneMarkAsDone(Long id) {
+        return repository.findById(id).map(todo -> {
+            todo.setDone(false);
+            todo.setDoneDate(null);
+            repository.save(todo);
+            return todo;
+        }).orElse(null);
+    }
+
 }

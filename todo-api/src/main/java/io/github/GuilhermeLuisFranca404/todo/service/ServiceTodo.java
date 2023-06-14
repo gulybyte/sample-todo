@@ -14,7 +14,9 @@ public interface ServiceTodo {
 	Page<List<Todo>> findAllWithMarkDone(int pageNumber);
 
 	void deleteByIdWithMarkDone(Long id);
+
 	Todo markAsDone(Long id);
 	Todo changeOrderById(Long id);
+	Todo undoneMarkAsDone(Long id);
 
 }

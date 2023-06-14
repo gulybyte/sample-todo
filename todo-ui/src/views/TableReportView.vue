@@ -19,6 +19,9 @@
           <template v-if="col.field === 'id'">
             <Button class="trash-button" @click="deleteById(rowData.data.id)"><i class="pi pi-trash"></i></Button>
           </template>
+          <template v-if="col.field === 'done'">
+              <Button class="change-order-button" @click="undoneMarkAsDone(rowData.data.id)"><i class="pi pi-times"></i></Button>
+            </template>
         </template>
       </Column>
     </DataTable>
@@ -40,6 +43,7 @@ const columns = [
   { field: 'createdDate', header: 'Data Criação' },
   { field: 'doneDate', header: 'Data Finalização' },
   { field: 'id', header: 'Deletar' },
+  { field: 'done', header: 'Desmarcar' },
 ];
 
 
@@ -47,6 +51,17 @@ const columns = [
 const onPage = (event) => {
   fetchData(event.page)
 };
+
+
+
+async function undoneMarkAsDone(id) {
+  const URL_DELETE_DATA = `${URL+id}/undone`
+
+  await fetch(URL_DELETE_DATA, {method: "PATCH"})
+
+  fetchData()
+}
+
 
 
 async function deleteById(id) {
@@ -57,6 +72,8 @@ async function deleteById(id) {
   fetchData()
 }
 
+
+
 async function fetchData(page) {
   if(page === null || page === '' || page === undefined) page = 0
 
@@ -65,6 +82,8 @@ async function fetchData(page) {
   if (response.ok) todos.value = await response.json()
 
 }
+
+
 
 onMounted(fetchData)
 </script>

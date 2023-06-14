@@ -64,4 +64,10 @@ public class ControllerTodo {
 		return ResponseEntity.ok().body(service.changeOrderById(id));
 	}
 
+
+    @PatchMapping("{id}/undone")
+    public ResponseEntity<Todo> undoneMarkAsDone(@PathVariable Long id) {
+		return ResponseEntity.ok().body(service.undoneMarkAsDone(id));
+    }
+
 }
