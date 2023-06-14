@@ -3,7 +3,6 @@ package io.github.GuilhermeLuisFranca404.todo.controller;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,23 +25,23 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 public class ControllerTodoTest {
 
-    private static final Integer       INDEX       = 0;
-    private static final Long          ID          = 1L;
-    private static final String        DESCRIPTION = "write tests to my API";
-    private static final Boolean       DONE        = false;
-    private static final LocalDateTime CREATE_DATE = LocalDateTime.of(2023, 6, 14, 12, 0);;
-    private static final LocalDateTime DONE_DATE   = LocalDateTime.of(2023, 6, 14, 12, 1);;
-    private static final LocalDateTime ORDER_TODO  = LocalDateTime.of(2023, 6, 14, 12, 2);;
+    private final Integer       INDEX       = 0;
+    private final Long          ID          = 1L;
+    private final String        DESCRIPTION = "write tests to my API";
+    private final Boolean       DONE        = null;
+    private final LocalDateTime CREATE_DATE = LocalDateTime.of(2023, 6, 14, 12, 0);
+    private final LocalDateTime DONE_DATE   = LocalDateTime.of(2023, 6, 14, 12, 1);
+    private final LocalDateTime ORDER_TODO  = LocalDateTime.of(2023, 6, 14, 12, 2);
+
+    private Todo todo;
+    private List<Todo> listTodo;
+    private Page<List<Todo>> pageListTodo;
 
     @InjectMocks
     private ControllerTodo controller;
 
     @Mock
     private ServiceTodoImpl service;
-
-    private Todo todo;
-    private List<Todo> listTodo;
-    private Page<List<Todo>> pageListTodo;
 
     @BeforeEach
     void setUp() {

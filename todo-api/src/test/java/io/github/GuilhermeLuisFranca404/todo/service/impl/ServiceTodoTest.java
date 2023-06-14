@@ -21,28 +21,29 @@ import io.github.GuilhermeLuisFranca404.todo.repository.TodoRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class ServiceTodoTest {
 
-    private static final Integer       INDEX       = 0;
-    private static final Long          ID          = 1L;
-    private static final String        DESCRIPTION = "write tests to my API";
-    private static final Boolean       DONE        = null;
-    private static final LocalDateTime CREATE_DATE = null;
-    private static final LocalDateTime DONE_DATE   = null;
-    private static final LocalDateTime ORDER_TODO  = null;
+    private final Integer       INDEX       = 0;
+    private final Long          ID          = 1L;
+    private final String        DESCRIPTION = "write tests to my API";
+    private final Boolean       DONE        = null;
+    private final LocalDateTime CREATE_DATE = LocalDateTime.of(2023, 6, 14, 12, 0);
+    private final LocalDateTime DONE_DATE   = LocalDateTime.of(2023, 6, 14, 12, 1);
+    private final LocalDateTime ORDER_TODO  = LocalDateTime.of(2023, 6, 14, 12, 2);
+
+    private Todo todo;
+    private List<Todo> listTodo;
+    private Optional<Todo> optionalTodo;
+    private Page<List<Todo>> pageListTodo;
 
     @InjectMocks
     private ServiceTodoImpl service;
 
     @Mock
     private TodoRepository repository;
-
-    private Todo todo;
-    private List<Todo> listTodo;
-    private Optional<Todo> optionalTodo;
-    private Page<List<Todo>> pageListTodo;
 
     @BeforeEach
     void setUp() {
@@ -53,7 +54,7 @@ class ServiceTodoTest {
 
 
     @Test
-    void whenSaveThenBodyHasTodoObject() {//arrumar nomebclatura
+    void whenSaveThenBodyIsObjectTodoAndDoneIsFalse() {
 
         when(repository.save(any())).thenReturn(todo);
 
@@ -62,40 +63,32 @@ class ServiceTodoTest {
         assertNotNull(response);
         assertEquals(todo.getClass(), response.getClass());
 
-        assertEquals(ID, response.getId());
-        assertEquals(DESCRIPTION, response.getDescription());
-        assertEquals(CREATE_DATE, response.getCreatedDate());
-        assertEquals(DONE_DATE, response.getDoneDate());
-        assertEquals(ORDER_TODO, response.getOrderTodo());
+        assertEquals(false, response.getDone());
 
-        assertEquals(/* DONE */false, response.getDone());
+        testAttrsTodoObjEqualsResponseBody(response, true, true, false, true, true, true);
 
     }
 
 
     @Test
-    void whenFindAllWithoutMarkDoneReturnAnListOfTodo() {
+    void whenFindAllWithoutMarkDoneThenBodyIsListObjectTodo() {
 
         when(repository.findAllWithoutMarkDone()).thenReturn(listTodo);
 
         var response = service.findAllWithoutMarkDone();
+        var responseObj = response.get(INDEX);
 
         assertNotNull(response);
         assertEquals(1, response.size());
-        assertEquals(todo.getClass(), response.get(INDEX).getClass());
+        assertEquals(todo.getClass(), responseObj.getClass());
 
-        assertEquals(ID, response.get(INDEX).getId());
-        assertEquals(DESCRIPTION, response.get(INDEX).getDescription());
-        assertEquals(DONE, response.get(INDEX).getDone());
-        assertEquals(CREATE_DATE, response.get(INDEX).getCreatedDate());
-        assertEquals(DONE_DATE, response.get(INDEX).getDoneDate());
-        assertEquals(ORDER_TODO, response.get(INDEX).getOrderTodo());
+        testAllAttrsTodoObjEqualsResponseBody(responseObj);
 
     }
 
 
     @Test
-    void whenfindAllWithMarkDoneReturnAnPageableListOfTodo() {
+    void whenFindAllWithMarkDoneThenBodyIsPageOfListObjectTodo() {
 
         when(repository.findAllWithMarkDone(any())).thenReturn(pageListTodo);
 
@@ -104,34 +97,29 @@ class ServiceTodoTest {
 
         assertNotNull(response);
         assertEquals(1, response.toList().size());
-        assertEquals(todo.getClass(), responseObj.getClass());
+        assertEquals(pageListTodo, response);
 
-        assertEquals(ID, responseObj.getId());
-        assertEquals(DESCRIPTION, responseObj.getDescription());
-        assertEquals(DONE, responseObj.getDone());
-        assertEquals(CREATE_DATE, responseObj.getCreatedDate());
-        assertEquals(DONE_DATE, responseObj.getDoneDate());
-        assertEquals(ORDER_TODO, responseObj.getOrderTodo());
+        testAllAttrsTodoObjEqualsResponseBody(responseObj);
 
     }
 
 
     @Test
-    void whenDeleteByIdWithMarkDoneWithSuccess() {
+    void whenDeleteByIdWithMarkDoneThenHaveSuccess() {
 
-        Optional<Todo> todoOptional = repository.findById(ID);
-        if (todoOptional.isPresent()) {
-            Todo todo = todoOptional.get();
-            if (Boolean.TRUE.equals(todo.getDone())) {
-                repository.deleteById(ID);
-            }
-        }
+        when(repository.findById(anyLong())).thenReturn(optionalTodo);
+
+        doNothing().when(repository).deleteById(anyLong());
+
+        service.deleteByIdWithMarkDone(ID);
+
+        verify(repository, times(1)).deleteById(anyLong());
 
     }
 
 
     @Test
-    void whenMarkAsDoneHasDoneTrueAndDoneDateNewDateTime() {
+    void whenMarkAsDoneThenBodyIsObjectTodoAndDoneIsTrueAndDoneDateIsNewDate() {
 
         when(repository.findById(anyLong())).thenReturn(optionalTodo);
 
@@ -140,20 +128,17 @@ class ServiceTodoTest {
         assertNotNull(response);
         assertEquals(todo.getClass(), response.getClass());
 
-        assertEquals(ID, response.getId());
-        assertEquals(DESCRIPTION, response.getDescription());
-        assertEquals(CREATE_DATE, response.getCreatedDate());
-        assertEquals(ORDER_TODO, response.getOrderTodo());
-
         assertEquals(true, response.getDone());
         assertNotNull(response.getDoneDate());
-        assertEquals(LocalDateTime.now().getClass(), response.getDoneDate().getClass());
+        assertNotEquals(DONE_DATE, response.getDoneDate());
+
+        testAttrsTodoObjEqualsResponseBody(response, true, true, false, true, false, true);
 
     }
 
 
     @Test
-    void whenChangeOrderByIdHasOrderTodoNewDateTime() {
+    void whenChangeOrderByIdThenBodyIsObjectTodoAndOrderTodoIsNewDate() {
 
         when(repository.findById(anyLong())).thenReturn(optionalTodo);
 
@@ -162,14 +147,10 @@ class ServiceTodoTest {
         assertNotNull(response);
         assertEquals(todo.getClass(), response.getClass());
 
-        assertEquals(ID, response.getId());
-        assertEquals(DESCRIPTION, response.getDescription());
-        assertEquals(DONE, response.getDone());
-        assertEquals(CREATE_DATE, response.getCreatedDate());
-        assertEquals(DONE_DATE, response.getDoneDate());
-
         assertNotNull(response.getOrderTodo());
-        assertEquals(LocalDateTime.now().getClass(), response.getOrderTodo().getClass());
+        assertNotEquals(ORDER_TODO, response.getOrderTodo());
+
+        testAttrsTodoObjEqualsResponseBody(response, true, true, true, true, true, false);
 
     }
 
@@ -178,6 +159,22 @@ class ServiceTodoTest {
 
 
 
+
+
+    private void testAllAttrsTodoObjEqualsResponseBody(Todo response) {
+        testAttrsTodoObjEqualsResponseBody(response, true, true, true, true, true, true);
+    }
+
+    private void testAttrsTodoObjEqualsResponseBody(Todo response,
+            boolean id, boolean description, boolean done, boolean createDate,
+            boolean doneDate, boolean orderTodo) {
+        if(id) assertEquals(ID, response.getId());
+        if(description) assertEquals(DESCRIPTION, response.getDescription());
+        if(done) assertEquals(DONE, response.getDone());
+        if(createDate) assertEquals(CREATE_DATE, response.getCreatedDate());
+        if(doneDate) assertEquals(DONE_DATE, response.getDoneDate());
+        if(orderTodo) assertEquals(ORDER_TODO, response.getOrderTodo());
+    }
 
     private void startUser() {
         todo = new Todo(ID, DESCRIPTION, DONE, CREATE_DATE, DONE_DATE, ORDER_TODO);

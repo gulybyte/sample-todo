@@ -41,7 +41,7 @@ public class ServiceTodoImpl implements ServiceTodo {
 
     @Override
     public void deleteByIdWithMarkDone(Long id) {
-        if(repository.findById(id).get().getDone()) repository.deleteById(id);
+        repository.deleteById(id);
     }
 
 
