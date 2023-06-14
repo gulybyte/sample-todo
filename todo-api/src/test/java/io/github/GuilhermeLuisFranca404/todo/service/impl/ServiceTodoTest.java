@@ -9,23 +9,18 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 
 import io.github.GuilhermeLuisFranca404.todo.model.Todo;
 import io.github.GuilhermeLuisFranca404.todo.repository.TodoRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class ServiceTodoTest {
@@ -38,8 +33,6 @@ class ServiceTodoTest {
     private static final LocalDateTime DONE_DATE   = null;
     private static final LocalDateTime ORDER_TODO  = null;
 
-    Page<List<Todo>> mockPage = Mockito.mock(Page.class);
-
     @InjectMocks
     private ServiceTodoImpl service;
 
@@ -47,8 +40,9 @@ class ServiceTodoTest {
     private TodoRepository repository;
 
     private Todo todo;
+    private List<Todo> listTodo;
     private Optional<Todo> optionalTodo;
-
+    private Page<List<Todo>> pageListTodo;
 
     @BeforeEach
     void setUp() {
@@ -59,7 +53,7 @@ class ServiceTodoTest {
 
 
     @Test
-    void whenSaveThenBodyHasTodoObject() {
+    void whenSaveThenBodyHasTodoObject() {//arrumar nomebclatura
 
         when(repository.save(any())).thenReturn(todo);
 
@@ -70,10 +64,11 @@ class ServiceTodoTest {
 
         assertEquals(ID, response.getId());
         assertEquals(DESCRIPTION, response.getDescription());
-        assertEquals(/* DONE */false, response.getDone());
         assertEquals(CREATE_DATE, response.getCreatedDate());
         assertEquals(DONE_DATE, response.getDoneDate());
         assertEquals(ORDER_TODO, response.getOrderTodo());
+
+        assertEquals(/* DONE */false, response.getDone());
 
     }
 
@@ -81,7 +76,7 @@ class ServiceTodoTest {
     @Test
     void whenFindAllWithoutMarkDoneReturnAnListOfTodo() {
 
-        when(repository.findAllWithoutMarkDone()).thenReturn(List.of(todo));
+        when(repository.findAllWithoutMarkDone()).thenReturn(listTodo);
 
         var response = service.findAllWithoutMarkDone();
 
@@ -102,7 +97,7 @@ class ServiceTodoTest {
     @Test
     void whenfindAllWithMarkDoneReturnAnPageableListOfTodo() {
 
-        when(repository.findAllWithMarkDone(any())).thenReturn(new PageImpl<>(Collections.singletonList(List.of(todo))));
+        when(repository.findAllWithMarkDone(any())).thenReturn(pageListTodo);
 
         var response = service.findAllWithMarkDone(INDEX);
         var responseObj = response.toList().get(INDEX).get(INDEX);
@@ -186,7 +181,9 @@ class ServiceTodoTest {
 
     private void startUser() {
         todo = new Todo(ID, DESCRIPTION, DONE, CREATE_DATE, DONE_DATE, ORDER_TODO);
+        listTodo = List.of(todo);
         optionalTodo = Optional.of(todo);
+        pageListTodo = new PageImpl<>(Collections.singletonList(listTodo));
     }
 
 }
