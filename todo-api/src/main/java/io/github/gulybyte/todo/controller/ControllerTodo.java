@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,8 +20,7 @@ import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.service.ServiceTodo;
 
 @RestController
-@RequestMapping("/api-rest/todos")
-@CrossOrigin(origins = {"*"})
+@RequestMapping({"/api-rest/todos", "/api-rest/todos/"})
 public class ControllerTodo {
 
     @Autowired
