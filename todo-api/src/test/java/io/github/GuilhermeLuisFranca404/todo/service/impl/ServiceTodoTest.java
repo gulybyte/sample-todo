@@ -26,13 +26,15 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class ServiceTodoTest {
 
-    private final Integer       INDEX       = 0;
-    private final Long          ID          = 1L;
-    private final String        DESCRIPTION = "write tests to my API";
-    private final Boolean       DONE        = null;
-    private final LocalDateTime CREATE_DATE = LocalDateTime.of(2023, 6, 14, 12, 0);
-    private final LocalDateTime DONE_DATE   = LocalDateTime.of(2023, 6, 14, 12, 1);
-    private final LocalDateTime ORDER_TODO  = LocalDateTime.of(2023, 6, 14, 12, 2);
+    private final Integer       INDEX           = 0;
+    private final Long          ID              = 1L;
+    private final String        DESCRIPTION     = "write tests to my API";
+    private final String        NEW_DESCRIPTION = "new description";
+    private final Boolean       DONE            = null;
+    private final LocalDateTime CREATE_DATE     = LocalDateTime.of(2023, 6, 14, 12, 0);
+    private final LocalDateTime DONE_DATE       = LocalDateTime.of(2023, 6, 14, 12, 1);
+    private final LocalDateTime ORDER_TODO      = LocalDateTime.of(2023, 6, 14, 12, 2);
+
 
     private Todo todo;
     private List<Todo> listTodo;
@@ -169,6 +171,24 @@ class ServiceTodoTest {
         assertNull(response.getDoneDate());
 
         testAttrsTodoObjEqualsResponseBody(response, true, true, false, true, false, true);
+
+    }
+
+
+    @Test
+    void whenUpdateDescriptionByIdThenBodyIsObjectTodoAndNewDescription() {
+
+        when(repository.findById(anyLong())).thenReturn(optionalTodo);
+
+        var response = service.updateDescriptionById(ID, NEW_DESCRIPTION);
+
+        assertNotNull(response);
+        assertEquals(todo.getClass(), response.getClass());
+
+        assertNotEquals(DESCRIPTION, response.getDescription());
+        assertEquals(NEW_DESCRIPTION, response.getDescription());
+
+        testAttrsTodoObjEqualsResponseBody(response, true, false, true, true, true, true);
 
     }
 

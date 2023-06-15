@@ -2,7 +2,9 @@ package io.github.GuilhermeLuisFranca404.todo.controller;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,13 +28,14 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 public class ControllerTodoTest {
 
-    private final Integer       INDEX       = 0;
-    private final Long          ID          = 1L;
-    private final String        DESCRIPTION = "write tests to my API";
-    private final Boolean       DONE        = null;
-    private final LocalDateTime CREATE_DATE = LocalDateTime.of(2023, 6, 14, 12, 0);
-    private final LocalDateTime DONE_DATE   = LocalDateTime.of(2023, 6, 14, 12, 1);
-    private final LocalDateTime ORDER_TODO  = LocalDateTime.of(2023, 6, 14, 12, 2);
+    private final Integer             INDEX           = 0;
+    private final Long                ID              = 1L;
+    private final String              DESCRIPTION     = "write tests to my API";
+    private final Map<String, String> MAP_DESCRIPTION = new HashMap<>();
+    private final Boolean             DONE            = null;
+    private final LocalDateTime       CREATE_DATE     = LocalDateTime.of(2023, 6, 14, 12, 0);
+    private final LocalDateTime       DONE_DATE       = LocalDateTime.of(2023, 6, 14, 12, 1);
+    private final LocalDateTime       ORDER_TODO      = LocalDateTime.of(2023, 6, 14, 12, 2);
 
     private Todo todo;
     private List<Todo> listTodo;
@@ -183,6 +186,31 @@ public class ControllerTodoTest {
         testAllAttrsTodoObjEqualsResponseBody(responseBody);
 
     }
+
+
+    @Test
+    void whenUpdateDescriptionByIdThenReturnSuccessAndBodyIsTodo() {
+
+        when(service.updateDescriptionById(ID, DESCRIPTION)).thenReturn(todo);
+
+        MAP_DESCRIPTION.put("description", DESCRIPTION);
+
+        var response = controller.updateDescriptionById(ID, MAP_DESCRIPTION);
+        var responseBody = response.getBody();
+
+        assertNotNull(response);
+        assertNotNull(responseBody);
+        assertEquals(todo, responseBody);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(ResponseEntity.class, response.getClass());
+
+        testAllAttrsTodoObjEqualsResponseBody(responseBody);
+
+    }
+
+
+
+
 
 
 
