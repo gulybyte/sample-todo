@@ -7,6 +7,11 @@
 
     <div class="card">
       <DataTable :value="todos" tableStyle="min-width: 50rem" stripedRows>
+        <Column field="createdDate" header="Data" sortable>
+          <template #body="createdDate">
+            {{ removeYear(createdDate.data.createdDate) }}
+          </template>
+        </Column>
         <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header">
           <template #body="rowData">
             <template v-if="col.field === 'id'">
@@ -14,9 +19,6 @@
             </template>
             <template v-if="col.field === 'description'">
               {{ rowData.data.description }}
-            </template>
-            <template v-if="col.field === 'createdDate'">
-              {{ removeYear(rowData.data.createdDate) }}
             </template>
             <template v-if="col.field === 'orderTodo'">
               <Button class="change-order-button" @click="changeOrderById(rowData.data.id)"><i class="pi pi-angle-double-up"></i></Button>
@@ -49,7 +51,6 @@ function removeYear(value) {
 }
 
 const columns = [
-  { field: 'createdDate', header: 'Criação' },
   { field: 'description', header: 'Descrição' },
   { field: 'id', header: 'Concluir' },
   { field: 'orderTodo', header: 'Ordem' },
