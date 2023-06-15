@@ -1,4 +1,4 @@
-package io.github.GuilhermeLuisFranca404.todo.model;
+package io.github.gulybyte.todo.model;
 
 import java.time.LocalDateTime;
 

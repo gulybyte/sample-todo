@@ -1,4 +1,4 @@
-package io.github.GuilhermeLuisFranca404.todo.service.impl;
+package io.github.gulybyte.todo.service.impl;
 
 import static org.mockito.Mockito.when;
 
@@ -16,8 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
-import io.github.GuilhermeLuisFranca404.todo.model.Todo;
-import io.github.GuilhermeLuisFranca404.todo.repository.TodoRepository;
+import io.github.gulybyte.todo.model.Todo;
+import io.github.gulybyte.todo.repository.TodoRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;

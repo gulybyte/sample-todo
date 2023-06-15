@@ -1,4 +1,4 @@
-package io.github.GuilhermeLuisFranca404.todo;
+package io.github.gulybyte.todo;
 
 //@SpringBootTest
 class ApplicationTests {

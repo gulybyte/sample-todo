@@ -1,4 +1,4 @@
-package io.github.GuilhermeLuisFranca404.todo.controller;
+package io.github.gulybyte.todo.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.GuilhermeLuisFranca404.todo.model.Todo;
-import io.github.GuilhermeLuisFranca404.todo.service.ServiceTodo;
+import io.github.gulybyte.todo.model.Todo;
+import io.github.gulybyte.todo.service.ServiceTodo;
 
 @RestController
 @RequestMapping("/api-rest/todos")

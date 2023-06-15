@@ -1,4 +1,4 @@
-package io.github.GuilhermeLuisFranca404.todo.service.impl;
+package io.github.gulybyte.todo.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import io.github.GuilhermeLuisFranca404.todo.model.Todo;
-import io.github.GuilhermeLuisFranca404.todo.repository.TodoRepository;
-import io.github.GuilhermeLuisFranca404.todo.service.ServiceTodo;
+import io.github.gulybyte.todo.model.Todo;
+import io.github.gulybyte.todo.repository.TodoRepository;
+import io.github.gulybyte.todo.service.ServiceTodo;
 
 @Service
 public class ServiceTodoImpl implements ServiceTodo {

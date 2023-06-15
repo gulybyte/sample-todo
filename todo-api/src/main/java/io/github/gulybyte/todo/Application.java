@@ -1,4 +1,4 @@
-package io.github.GuilhermeLuisFranca404.todo;
+package io.github.gulybyte.todo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,9 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan(basePackages = "io.github.GuilhermeLuisFranca404.todo.model")//diz para escanear tudo neste pacote como uma entidade de modelo
-@ComponentScan(basePackages =  "io.github.GuilhermeLuisFranca404.*")//mapeando todos os pacotes
-@EnableJpaRepositories(basePackages = {"io.github.GuilhermeLuisFranca404.todo.repository"})
+@EntityScan(basePackages = "io.github.gulybyte.todo.model")//diz para escanear tudo neste pacote como uma entidade de modelo
+@ComponentScan(basePackages =  "io.github.gulybyte.*")//mapeando todos os pacotes
+@EnableJpaRepositories(basePackages = {"io.github.gulybyte.todo.repository"})
 public class Application {
 
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package io.github.GuilhermeLuisFranca404.todo.controller;
+package io.github.gulybyte.todo.controller;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -17,8 +17,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import io.github.GuilhermeLuisFranca404.todo.model.Todo;
-import io.github.GuilhermeLuisFranca404.todo.service.ServiceTodo;
+import io.github.gulybyte.todo.model.Todo;
+import io.github.gulybyte.todo.service.ServiceTodo;
 
 import static org.junit.jupiter.api.Assertions.*;
 /* import static org.assertj.core.api.Assertions.*; */

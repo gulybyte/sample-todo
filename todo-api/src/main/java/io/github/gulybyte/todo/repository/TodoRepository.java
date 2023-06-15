@@ -1,4 +1,4 @@
-package io.github.GuilhermeLuisFranca404.todo.repository;
+package io.github.gulybyte.todo.repository;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import io.github.GuilhermeLuisFranca404.todo.model.Todo;
+import io.github.gulybyte.todo.model.Todo;
 
 @Repository
 public interface TodoRepository extends JpaRepository<Todo, Long> {
