@@ -18,5 +18,6 @@ public interface ServiceTodo {
 	Todo markAsDone(Long id);
 	Todo changeOrderById(Long id);
 	Todo undoneMarkAsDone(Long id);
+    Todo updateDescriptionById(Long id, String description);
 
 }

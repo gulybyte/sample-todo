@@ -13,7 +13,6 @@ import io.github.GuilhermeLuisFranca404.todo.model.Todo;
 @Repository
 public interface TodoRepository extends JpaRepository<Todo, Long> {
 
-
     @Query(value = "select c from Todo c"
                     + " where c.done = false"
                     + " order by order_todo desc")
@@ -21,5 +20,6 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
 
     @Query(value = "select c from Todo c where c.done = true")
 	Page<List<Todo>> findAllWithMarkDone(Pageable pageable);
+
 
 }

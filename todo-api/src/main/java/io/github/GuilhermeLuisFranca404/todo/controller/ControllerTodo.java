@@ -1,7 +1,9 @@
 package io.github.GuilhermeLuisFranca404.todo.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import io.github.GuilhermeLuisFranca404.todo.model.Todo;
 import io.github.GuilhermeLuisFranca404.todo.service.ServiceTodo;
@@ -68,6 +74,13 @@ public class ControllerTodo {
     @PatchMapping("{id}/undone")
     public ResponseEntity<Todo> undoneMarkAsDone(@PathVariable Long id) {
 		return ResponseEntity.ok().body(service.undoneMarkAsDone(id));
+    }
+
+    @PatchMapping("{id}/update-description")
+    public ResponseEntity<Todo> updateDescriptionById(@PathVariable Long id,
+            @RequestBody Map<String, String> requestBody) {
+        var description = requestBody.get("description");
+        return ResponseEntity.ok().body(service.updateDescriptionById(id, description));
     }
 
 }

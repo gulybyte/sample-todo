@@ -19,6 +19,7 @@ import io.github.GuilhermeLuisFranca404.todo.model.Todo;
 import io.github.GuilhermeLuisFranca404.todo.service.ServiceTodo;
 
 import static org.junit.jupiter.api.Assertions.*;
+/* import static org.assertj.core.api.Assertions.*; */
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
