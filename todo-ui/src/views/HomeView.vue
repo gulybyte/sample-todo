@@ -16,7 +16,7 @@
               {{ rowData.data.description }}
             </template>
             <template v-if="col.field === 'createdDate'">
-              {{ hours(rowData.data.createdDate) }} <br> {{ removeYear(rowData.data.createdDate) }}
+              {{ removeYear(rowData.data.createdDate) }}
             </template>
             <template v-if="col.field === 'orderTodo'">
               <Button class="change-order-button" @click="changeOrderById(rowData.data.id)"><i class="pi pi-angle-double-up"></i></Button>
@@ -43,20 +43,15 @@ const todos = ref([])
 
 
 function removeYear(value) {
-  const [day, month] = value.split('/');
-  return `${day}/${month}`;
+  const [date, hours] = value.split(' ');
+  const [day, month] = date.split('/');
+  return `${hours} ${day}/${month}`;
 }
-
-function hours(value) {
-  const [year, hours] = value.split(' ');
-  return `${hours}`;
-}
-
 
 const columns = [
+  { field: 'createdDate', header: 'Criação' },
   { field: 'description', header: 'Descrição' },
   { field: 'id', header: 'Concluir' },
-  { field: 'createdDate', header: 'Criação' },
   { field: 'orderTodo', header: 'Ordem' },
 ];
 
