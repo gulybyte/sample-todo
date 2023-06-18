@@ -20,7 +20,7 @@ import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.service.ServiceTodo;
 
 @RestController
-@RequestMapping({"/api-rest/todos", "/api-rest/todos/"})
+@RequestMapping("/")
 public class ControllerTodo {
 
     @Autowired

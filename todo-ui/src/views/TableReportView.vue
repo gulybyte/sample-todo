@@ -34,7 +34,7 @@
 import HeaderReport from '../components/HeaderReport.vue'
 import { ref, onMounted } from 'vue';
 
-const URL = 'http://localhost:8080/api-rest/todos/'
+const URL = 'http://localhost:5000/'
 
 const todos = ref([])
 
