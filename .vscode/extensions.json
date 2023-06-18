@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "vscjava.vscode-java-pack",
+        "richardwillis.vscode-gradle-extension-pack",
+        "vmware.vscode-boot-dev-pack",
+        "vue.volar"
+    ]
+}
