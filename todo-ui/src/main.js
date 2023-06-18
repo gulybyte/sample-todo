@@ -9,8 +9,9 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import ColumnGroup from 'primevue/columngroup';   // optional
-import Row from 'primevue/row';                   // optional
+import ColumnGroup from 'primevue/columngroup';
+import Row from 'primevue/row';
+import ProgressSpinner from 'primevue/progressspinner';
 
 
 const app = createApp(App)
@@ -24,6 +25,8 @@ app.component('DataTable', DataTable)
 app.component('Column', Column)
 app.component('ColumnGroup', ColumnGroup)
 app.component('Row', Row)
+app.component('ProgressSpinner', ProgressSpinner)
+
 
 
 

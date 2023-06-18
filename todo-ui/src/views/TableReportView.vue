@@ -1,4 +1,7 @@
 <template>
+  <div v-if="loading" class="loader-progress">
+    <ProgressSpinner  />
+  </div>
   <HeaderReport></HeaderReport>
 
   <div class="card">
@@ -37,6 +40,7 @@ import { ref, onMounted } from 'vue';
 const URL = 'http://localhost:5000/'
 
 const todos = ref([])
+var loading = ref(false)
 
 const columns = [
   { field: 'description', header: 'Descrição' },
@@ -52,9 +56,19 @@ const onPage = (event) => {
   fetchData(event.page)
 };
 
+async function enableLoad() {
+  loading.value = true
+} function disableLoad() {
+  setTimeout(() => {
+    loading.value = false;
+  }, 300);
+}
+
 
 
 async function undoneMarkAsDone(id) {
+  enableLoad();
+
   const URL_DELETE_DATA = `${URL+id}/undone`
 
   await fetch(URL_DELETE_DATA, {method: "PATCH"})
@@ -65,6 +79,8 @@ async function undoneMarkAsDone(id) {
 
 
 async function deleteById(id) {
+  enableLoad();
+
   const URL_DELETE_DATA = `${URL+id}`
 
   await fetch(URL_DELETE_DATA, {method: "DELETE"})
@@ -75,12 +91,15 @@ async function deleteById(id) {
 
 
 async function fetchData(page) {
+  enableLoad();
+
   if(page === null || page === '' || page === undefined) page = 0
 
   const response = await fetch(`${URL}finalized?page=${page}`)
 
   if (response.ok) todos.value = await response.json()
 
+  disableLoad();
 }
 
 

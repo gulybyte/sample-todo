@@ -1,4 +1,7 @@
 <template>
+  <div v-if="loading" class="loader-progress">
+    <ProgressSpinner  />
+  </div>
   <div>
     <InputText v-model="description" type="text" style="width: 100%;" class="mb-05rem" />
 
@@ -51,6 +54,7 @@ const HEADERS = { 'Content-Type': 'application/json' }
 
 const description = ref('')
 const todos = ref([])
+var loading = ref(false)
 
 
 const columns = [
@@ -74,20 +78,28 @@ const onCellEditComplete = (event) => {
     }
 };
 
-
-
+async function enableLoad() {
+  loading.value = true
+} function disableLoad() {
+  setTimeout(() => {
+    loading.value = false;
+  }, 300);
+}
 
 
 async function fetchData() {
-  const response = await fetch(URL)
+  enableLoad();
+  const response = await fetch(URL);
   if (response.ok) {
-    todos.value = await response.json()
+    todos.value = await response.json();
   }
+  disableLoad();
 }
 
 
 
 async function markAsDone(id) {
+  enableLoad();
 
   const URL_DELETE_DATA = `${URL+id}/done`
 
@@ -99,6 +111,7 @@ async function markAsDone(id) {
 
 
 async function changeOrderById(id) {
+  enableLoad();
 
   const URL_ORDER_DATA = `${URL+id}/order`
 
@@ -110,6 +123,7 @@ async function changeOrderById(id) {
 
 
 async function updateDescriptionById(id, description) {
+  enableLoad();
 
   const URL_UPDATE_DESCRIPTION = `${URL+id}/update-description`
 
@@ -126,6 +140,8 @@ async function updateDescriptionById(id, description) {
 
 
 async function postData() {
+  enableLoad();
+
   await fetch(URL,
   {
     method: 'POST',
