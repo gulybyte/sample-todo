@@ -1,4 +1,4 @@
-package io.github.gulybyte.todo.repository.util;
+package io.github.gulybyte.todo.util;
 
 import java.time.LocalDateTime;
 

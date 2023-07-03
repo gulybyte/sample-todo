@@ -10,7 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 
 import io.github.gulybyte.todo.model.Todo;
-import io.github.gulybyte.todo.repository.util.TodoCreator;
+import io.github.gulybyte.todo.util.TodoCreator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
