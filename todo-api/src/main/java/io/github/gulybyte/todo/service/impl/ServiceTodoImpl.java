@@ -33,14 +33,14 @@ public class ServiceTodoImpl implements ServiceTodo {
 
 
     @Override
-    public Page<List<Todo>> findAllWithMarkDone(int pageNumber) {
+    public Page<Todo> findAllWithMarkDone(int pageNumber) {
 		var page = PageRequest.of(pageNumber, 5, Sort.Direction.DESC, "doneDate");
         return repository.findAllWithMarkDone(page);
     }
 
 
     @Override
-    public void deleteByIdWithMarkDone(Long id) {
+    public void deleteById(Long id) {
         repository.deleteById(id);
     }
 

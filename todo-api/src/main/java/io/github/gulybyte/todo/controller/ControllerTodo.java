@@ -39,15 +39,15 @@ public class ControllerTodo {
 
 
 	@GetMapping("finalized")
-	public ResponseEntity<Page<List<Todo>>> findAllWithMarkDone(
+	public ResponseEntity<Page<Todo>> findAllWithMarkDone(
 			@RequestParam(value = "page", required = false, defaultValue = "0") int pageNumber) {
 		return ResponseEntity.ok().body(service.findAllWithMarkDone(pageNumber));
 	}
 
 
 	@DeleteMapping("{id}")
-	public ResponseEntity<Void> deleteByIdWithMarkDone(@PathVariable Long id) {
-        service.deleteByIdWithMarkDone(id);
+	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        service.deleteById(id);
         return ResponseEntity.noContent().build();
 	}
 

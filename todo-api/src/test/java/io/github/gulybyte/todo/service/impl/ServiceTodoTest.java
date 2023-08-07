@@ -39,7 +39,7 @@ class ServiceTodoTest {
     private Todo todo;
     private List<Todo> listTodo;
     private Optional<Todo> optionalTodo;
-    private Page<List<Todo>> pageListTodo;
+    private Page<Todo> pageListTodo;
 
     @InjectMocks
     private ServiceTodoImpl service;
@@ -95,7 +95,7 @@ class ServiceTodoTest {
         when(repository.findAllWithMarkDone(any())).thenReturn(pageListTodo);
 
         var response = service.findAllWithMarkDone(INDEX);
-        var responseObj = response.toList().get(INDEX).get(INDEX);
+        var responseObj = response.toList().get(INDEX);
 
         assertNotNull(response);
         assertEquals(1, response.toList().size());
@@ -113,7 +113,7 @@ class ServiceTodoTest {
 
         doNothing().when(repository).deleteById(anyLong());
 
-        service.deleteByIdWithMarkDone(ID);
+        service.deleteById(ID);
 
         verify(repository, times(1)).deleteById(anyLong());
 
@@ -216,7 +216,7 @@ class ServiceTodoTest {
         todo = new Todo(ID, DESCRIPTION, DONE, CREATE_DATE, DONE_DATE, ORDER_TODO);
         listTodo = List.of(todo);
         optionalTodo = Optional.of(todo);
-        pageListTodo = new PageImpl<>(Collections.singletonList(listTodo));
+        pageListTodo = new PageImpl<>(Collections.singletonList(todo));
     }
 
 }

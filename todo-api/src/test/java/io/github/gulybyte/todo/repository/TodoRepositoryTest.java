@@ -65,7 +65,7 @@ public class TodoRepositoryTest {
 
 		var page = PageRequest.of(0, 5, Sort.Direction.DESC, "doneDate");
 
-        Page<List<Todo>> response = repository.findAllWithMarkDone(page);
+        Page<Todo> response = repository.findAllWithMarkDone(page);
 
         assertEquals(1, response.getNumberOfElements());
 

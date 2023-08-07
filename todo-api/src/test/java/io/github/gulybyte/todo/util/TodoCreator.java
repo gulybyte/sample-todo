@@ -41,4 +41,14 @@ public class TodoCreator {
                 .build();
     }
 
+    public static Todo createTodoDefault(){
+        return Todo.builder()
+                .description(DEFAULT_STRING)
+                .done(DEFAULT_BOOLEAN)
+                .createdDate(DEFAULT_DATE)
+                .doneDate(DEFAULT_DATE)
+                .orderTodo(DEFAULT_DATE)
+                .build();
+    }
+
 }

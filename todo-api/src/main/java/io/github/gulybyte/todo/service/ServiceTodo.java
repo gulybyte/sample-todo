@@ -11,9 +11,9 @@ public interface ServiceTodo {
     Todo save(Todo todo);
 
 	List<Todo> findAllWithoutMarkDone();
-	Page<List<Todo>> findAllWithMarkDone(int pageNumber);
+	Page<Todo> findAllWithMarkDone(int pageNumber);
 
-	void deleteByIdWithMarkDone(Long id);
+	void deleteById(Long id);
 
 	Todo markAsDone(Long id);
 	Todo changeOrderById(Long id);
