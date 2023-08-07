@@ -10,7 +10,7 @@ public interface ServiceTodo {
 
     Todo save(Todo todo);
 
-	List<Todo> findAllWithoutMarkDone();
+	List<Todo> findAllWithoutMarkDoneNonPageable();
 	Page<Todo> findAllWithMarkDone(int pageNumber);
 
 	void deleteById(Long id);

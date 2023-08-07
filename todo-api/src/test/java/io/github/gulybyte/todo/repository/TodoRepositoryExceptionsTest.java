@@ -27,7 +27,7 @@ public class TodoRepositoryExceptionsTest {
 
         this.repository.save(todoToBeSaved);
 
-        List<Todo> response = this.repository.findAllWithoutMarkDone();
+        List<Todo> response = this.repository.findAllWithoutMarkDoneNonPageable();
 
         assertNotNull(response);
         assertEquals(0, response.size());

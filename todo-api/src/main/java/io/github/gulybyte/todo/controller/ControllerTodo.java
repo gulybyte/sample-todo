@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.service.ServiceTodo;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/")
@@ -27,21 +29,21 @@ public class ControllerTodo {
     private ServiceTodo service;
 
 	@PostMapping
-	public ResponseEntity<Todo> save(@RequestBody Todo todo) {
-        return ResponseEntity.ok().body(service.save(todo));
+	public ResponseEntity<Todo> save(@RequestBody @Valid Todo todo) {
+        return new ResponseEntity<>(service.save(todo), HttpStatus.CREATED);
 	}
 
 
 	@GetMapping
 	public ResponseEntity<List<Todo>> findAllWithoutMarkDone(){
-		return ResponseEntity.ok().body(service.findAllWithoutMarkDone());
+		return ResponseEntity.ofNullable(service.findAllWithoutMarkDoneNonPageable());
 	}
 
 
 	@GetMapping("finalized")
 	public ResponseEntity<Page<Todo>> findAllWithMarkDone(
 			@RequestParam(value = "page", required = false, defaultValue = "0") int pageNumber) {
-		return ResponseEntity.ok().body(service.findAllWithMarkDone(pageNumber));
+		return ResponseEntity.ofNullable(service.findAllWithMarkDone(pageNumber));
 	}
 
 

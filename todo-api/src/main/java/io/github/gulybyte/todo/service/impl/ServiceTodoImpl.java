@@ -8,7 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import io.github.gulybyte.todo.exception.status.BadRequestException;
 import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.repository.TodoRepository;
 import io.github.gulybyte.todo.service.ServiceTodo;
@@ -19,7 +21,7 @@ public class ServiceTodoImpl implements ServiceTodo {
     @Autowired
 	private TodoRepository repository;
 
-    @Override
+    @Override @Transactional
     public Todo save(Todo todo) {
         if (todo.getDone() == null) todo.setDone(false);
         return repository.save(todo);
@@ -27,20 +29,21 @@ public class ServiceTodoImpl implements ServiceTodo {
 
 
     @Override
-    public List<Todo> findAllWithoutMarkDone() {
-        return repository.findAllWithoutMarkDone();
+    public List<Todo> findAllWithoutMarkDoneNonPageable() {
+        return repository.findAllWithoutMarkDoneNonPageable().isEmpty() ? null : repository.findAllWithoutMarkDoneNonPageable();
     }
 
 
     @Override
     public Page<Todo> findAllWithMarkDone(int pageNumber) {
 		var page = PageRequest.of(pageNumber, 5, Sort.Direction.DESC, "doneDate");
-        return repository.findAllWithMarkDone(page);
+        return repository.findAllWithMarkDone(page).isEmpty() ? null : repository.findAllWithMarkDone(page);
     }
 
 
     @Override
     public void deleteById(Long id) {
+        if (!repository.existsById(id)) throw new BadRequestException("Todo Not Found!");
         repository.deleteById(id);
     }
 
@@ -50,18 +53,15 @@ public class ServiceTodoImpl implements ServiceTodo {
         return repository.findById(id).map(todo -> {
             todo.setDone(true);
             todo.setDoneDate(LocalDateTime.now());
-            repository.save(todo);
-            return todo;
+            return repository.save(todo);
         }).orElse(null);
     }
-
 
     @Override
     public Todo changeOrderById(Long id) {
         return repository.findById(id).map(todo -> {
             todo.setOrderTodo(LocalDateTime.now());
-            repository.save(todo);
-            return todo;
+            return repository.save(todo);
         }).orElse(null);
     }
 
@@ -70,19 +70,17 @@ public class ServiceTodoImpl implements ServiceTodo {
         return repository.findById(id).map(todo -> {
             todo.setDone(false);
             todo.setDoneDate(null);
-            repository.save(todo);
-            return todo;
+            return repository.save(todo);
         }).orElse(null);
     }
-
 
     @Override
     public Todo updateDescriptionById(Long id, String description) {
         return repository.findById(id).map(todo -> {
             todo.setDescription(description);
-            repository.save(todo);
-            return todo;
+            return repository.save(todo);
         }).orElse(null);
     }
+
 
 }

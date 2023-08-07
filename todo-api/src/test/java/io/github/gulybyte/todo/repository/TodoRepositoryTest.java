@@ -45,7 +45,7 @@ public class TodoRepositoryTest {
 
         this.repository.save(todoToBeSaved);
 
-        List<Todo> response = this.repository.findAllWithoutMarkDone();
+        List<Todo> response = this.repository.findAllWithoutMarkDoneNonPageable();
         var responseObj = response.get(INDEX);
 
         assertNotNull(response);

@@ -1,7 +1,5 @@
 package io.github.gulybyte.todo.service.impl;
 
-import static org.mockito.Mockito.when;
-
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -75,9 +73,9 @@ class ServiceTodoTest {
     @Test
     void whenFindAllWithoutMarkDoneThenBodyIsListObjectTodo() {
 
-        when(repository.findAllWithoutMarkDone()).thenReturn(listTodo);
+        when(repository.findAllWithoutMarkDoneNonPageable()).thenReturn(listTodo);
 
-        var response = service.findAllWithoutMarkDone();
+        var response = service.findAllWithoutMarkDoneNonPageable();
         var responseObj = response.get(INDEX);
 
         assertNotNull(response);

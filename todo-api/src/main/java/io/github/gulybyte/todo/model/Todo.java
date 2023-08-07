@@ -8,6 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -29,6 +31,8 @@ public class Todo {
 	private Long id;
 
 	@Column
+    @NotBlank(message = "The description cannot be blank!")
+    @Size(max = 350, message = "Description is too long (max: 350 characters)!!")
 	private String description;
 
 	@Column

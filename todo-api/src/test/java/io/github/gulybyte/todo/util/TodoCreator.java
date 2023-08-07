@@ -6,7 +6,7 @@ import io.github.gulybyte.todo.model.Todo;
 
 public class TodoCreator {
 
-    private static final String DEFAULT_STRING = null;
+    private static final String DEFAULT_STRING = "first description";
     private static final Boolean DEFAULT_BOOLEAN = false;
     private static final LocalDateTime DEFAULT_DATE = null;
 

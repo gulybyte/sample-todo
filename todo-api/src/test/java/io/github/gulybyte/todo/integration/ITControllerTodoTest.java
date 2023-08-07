@@ -48,7 +48,7 @@ public class ITControllerTodoTest {
     void save() {
 
         var entity = TodoCreator.createTodoDefault();
-        var requestEntity = createRequestEntityTodo(entity);
+        var requestEntity = createRequestEntity(entity);
 
         ResponseEntity<Todo> response = testRest.exchange("/", HttpMethod.POST,
             requestEntity, new ParameterizedTypeReference<Todo>() {});
@@ -148,8 +148,10 @@ public class ITControllerTodoTest {
     void updateDescriptionById() {
 
         var entity = TodoCreator.createTodoDefault();
-        var requestEntity = createRequestDescription("new description");
         var savedTodo = repository.save(entity);
+
+        var description = createJson("description", "new description");
+        var requestEntity = createRequestEntity(description);
 
         var response = testRest.exchange("/{id}/update-description", HttpMethod.PATCH,
             requestEntity, new ParameterizedTypeReference<Todo>() {}, savedTodo.getId());
@@ -165,22 +167,15 @@ public class ITControllerTodoTest {
 
 
 
-    private HttpEntity<Todo> createRequestEntityTodo(Todo todo) {
+    private <T> HttpEntity<T> createRequestEntity(T obj) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        return new HttpEntity<>(todo, headers);
+        return new HttpEntity<>(obj, headers);
     }
 
-    private HttpEntity<String> createRequestDescription(String description) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        return new HttpEntity<>("{\"description\": \""+description+"\"}", headers);
+    private String createJson(String key, String value) {
+        return "{\""+key+"\": \""+value+"\"}";
     }
-
-/*
- * MODELO ACIMA, SÓ SEGUIR E TERMINAR..., FAZER REVISÃO EM TODOS OS OUTROS TESTES, ORDEM NO ASSERTEQUAL, DIMINUIR
- * NOMENCLATURA (é nescessario descrever?, o código já não faz?, e que tau usar @DisplayName?)
- */
 
 
 
