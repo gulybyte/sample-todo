@@ -33,7 +33,7 @@ public class ServiceTodoImpl implements ServiceTodo {
 
     @Override @Transactional
     public Todo updateDescription(UpdateDescriptionTodoPutRequestBodyFilter todoBody) {
-        return repository.findById(todoBody.getId()).map(todo ->
+        var todoToSave = repository.findById(todoBody.getId()).map(todo ->
         {
             if (todo.getDescription().equals(todoBody.getDescription()))
                 throw new ConflictException("Feature description remains the same");
@@ -41,6 +41,8 @@ public class ServiceTodoImpl implements ServiceTodo {
             return repository.save(todo);
         })
         .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
+
+        return repository.save(todoToSave);
     }
 
 
@@ -69,40 +71,43 @@ public class ServiceTodoImpl implements ServiceTodo {
 
     @Override
     public Todo markAsDone(Long id) {
-        return repository.findById(id).map(todo ->
-        {
+        var todoToSave = repository.findById(id).map(todo -> {
             if (todo.getDone())
                 throw new ConflictException("Todo is already mark as done");
             todo.setDone(true);
             todo.setDoneDate(LocalDateTime.now());
-            return repository.save(todo);
+            return todo;
         })
         .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
+
+        return repository.save(todoToSave);
     }
 
 
     @Override
     public Todo undoneMarkAsDone(Long id) {
-        return repository.findById(id).map(todo ->
-        {
+        var todoToSave = repository.findById(id).map(todo -> {
             if (!todo.getDone())
                 throw new ConflictException("Todo not already mark as done yet");
             todo.setDone(false);
             todo.setDoneDate(null);
-            return repository.save(todo);
+            return todo;
         })
         .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
+
+        return repository.save(todoToSave);
     }
 
 
     @Override
     public Todo changeOrderById(Long id) {
-        return repository.findById(id).map(todo ->
-        {
+        var todoToSave = repository.findById(id).map(todo -> {
             todo.setOrderTodo(LocalDateTime.now());
-            return repository.save(todo);
+            return todo;
         })
         .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
+
+        return repository.save(todoToSave);
     }
 
 }
