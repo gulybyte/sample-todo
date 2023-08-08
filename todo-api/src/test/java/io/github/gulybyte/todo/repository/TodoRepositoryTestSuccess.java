@@ -12,15 +12,13 @@ import org.springframework.data.domain.PageRequest;
 
 import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.util.TodoCreator;
+import static io.github.gulybyte.todo.util.ArgumentosMatchersTodo.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest// h2 enable
 //@ActiveProfiles("test")// disable flyway
 public class TodoRepositoryTestSuccess {
-
-    private final Integer INDEX = 0;
-
 
     @Autowired
     private TodoRepository repository;
