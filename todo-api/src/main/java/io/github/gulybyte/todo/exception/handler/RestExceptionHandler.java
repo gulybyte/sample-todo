@@ -109,9 +109,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         var exceptionDetails = ExceptionDetails.builder()
                 .timestamp(LocalDateTime.now())
                 .status(status.value())
-                .title(ex.getCause().getMessage())
-                .details(ex.getMessage())
-                .developerMessage(ex.getClass().getName())
+                .title("INTERNAL ERROR 500")
+                .details("SERVER ERROR")
+                .developerMessage(ex.getLocalizedMessage())
                 .build();
 
         return new ResponseEntity<>(exceptionDetails, headers, status);

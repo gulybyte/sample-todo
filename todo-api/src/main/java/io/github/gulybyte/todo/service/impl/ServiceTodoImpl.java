@@ -25,6 +25,7 @@ public class ServiceTodoImpl implements ServiceTodo {
 
     @Override @Transactional
     public Todo save(Todo todo) {
+        todo.setId(null);
         if (todo.getDone() == null) todo.setDone(false);
         return repository.save(todo);
     }
