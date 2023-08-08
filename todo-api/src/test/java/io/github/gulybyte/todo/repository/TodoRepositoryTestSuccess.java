@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest// h2 enable
 //@ActiveProfiles("test")// disable flyway
-public class TodoRepositoryTest {
+public class TodoRepositoryTestSuccess {
 
     private final Integer INDEX = 0;
 

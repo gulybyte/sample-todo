@@ -16,7 +16,7 @@ import io.github.gulybyte.todo.util.TodoCreator;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class TodoRepositoryExceptionsTest {
+public class TodoRepositoryTestExceptions {
 
     @Autowired
     private TodoRepository repository;
