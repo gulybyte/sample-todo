@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.github.gulybyte.todo.exception.status.ConflictException;
 import io.github.gulybyte.todo.exception.status.NotFoundException;
+import io.github.gulybyte.todo.filter.body.UpdateDescriptionTodoPutRequestBodyFilter;
 import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.repository.TodoRepository;
 import io.github.gulybyte.todo.service.ServiceTodo;
@@ -26,6 +27,18 @@ public class ServiceTodoImpl implements ServiceTodo {
     public Todo save(Todo todo) {
         if (todo.getDone() == null) todo.setDone(false);
         return repository.save(todo);
+    }
+
+
+    @Override @Transactional
+    public Todo updateDescription(UpdateDescriptionTodoPutRequestBodyFilter todoBody) {
+        return repository.findById(todoBody.getId()).map(todo -> {
+            if (todo.getDescription().equals(todoBody.getDescription()))
+                throw new ConflictException("Feature description remains the same");
+            todo.setDescription(todoBody.getDescription());
+            return repository.save(todo);
+        })
+        .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
     }
 
 
@@ -84,16 +97,5 @@ public class ServiceTodoImpl implements ServiceTodo {
         })
         .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
     }
-
-
-    @Override
-    public Todo updateDescriptionById(Long id, String description) {
-        return repository.findById(id).map(todo -> {
-            todo.setDescription(description);
-            return repository.save(todo);
-        })
-        .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
-    }
-
 
 }

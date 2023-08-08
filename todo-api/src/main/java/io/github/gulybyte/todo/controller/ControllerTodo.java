@@ -1,7 +1,6 @@
 package io.github.gulybyte.todo.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,12 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.gulybyte.todo.filter.body.UpdateDescriptionTodoPutRequestBodyFilter;
 import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.service.ServiceTodo;
 import jakarta.validation.Valid;
@@ -33,6 +34,12 @@ public class ControllerTodo {
 	public ResponseEntity<Todo> save(@RequestBody @Valid Todo todo) {
         return new ResponseEntity<>(service.save(todo), HttpStatus.CREATED);
 	}
+
+
+    @PutMapping("update-description")
+    public ResponseEntity<Todo> updateDescription(@RequestBody @Valid UpdateDescriptionTodoPutRequestBodyFilter todoBody) {
+        return ResponseEntity.ok(service.updateDescription(todoBody));
+    }
 
 
 	@GetMapping
@@ -71,13 +78,5 @@ public class ControllerTodo {
 	public ResponseEntity<Todo> changeOrderById(@PathVariable Long id) {
 		return ResponseEntity.ok().body(service.changeOrderById(id));
 	}
-
-
-    @PatchMapping("{id}/update-description")
-    public ResponseEntity<Todo> updateDescriptionById(@PathVariable Long id,
-            @RequestBody Map<String, String> requestBody) {
-        var description = requestBody.get("description");
-        return ResponseEntity.ok().body(service.updateDescriptionById(id, description));
-    }
 
 }

@@ -9,10 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import io.github.gulybyte.todo.model.Todo;
-import jakarta.transaction.Transactional;
 
 @Repository
-@Transactional
 @org.springframework.transaction.annotation.Transactional
 public interface TodoRepository extends JpaRepository<Todo, Long> {
 

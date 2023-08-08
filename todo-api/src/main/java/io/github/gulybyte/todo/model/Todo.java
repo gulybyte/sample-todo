@@ -31,8 +31,8 @@ public class Todo {
 	private Long id;
 
 	@Column
-    @NotBlank(message = "The description cannot be blank!")
-    @Size(max = 350, message = "Description is too long (max: 350 characters)!!")
+    @NotBlank(message = "The description cannot be blank.")
+    @Size(max = 350, message = "Description is too long (max: 350 characters).")
 	private String description;
 
 	@Column

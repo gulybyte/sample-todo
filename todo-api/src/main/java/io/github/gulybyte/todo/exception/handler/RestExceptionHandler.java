@@ -2,7 +2,6 @@ package io.github.gulybyte.todo.exception.handler;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpHeaders;
@@ -26,7 +25,6 @@ import io.github.gulybyte.todo.exception.status.NotFoundException;
 import io.github.gulybyte.todo.exception.status.details.BadRequestExceptionDetails;
 import io.github.gulybyte.todo.exception.status.details.ConflictExceptionDetails;
 import io.github.gulybyte.todo.exception.status.details.NotFoundExceptionDetails;
-import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
 @RestControllerAdvice
@@ -74,32 +72,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
 
         return new ResponseEntity<>(conflictException, HttpStatus.CONFLICT);
-    }
-
-
-
-
-
-
-    /* TIRAR ISSO QUANTO ANTES */
-    @ExceptionHandler(ConstraintViolationException.class)// common exception in HttpMethod.PATCH
-    public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException exception)
-    {
-        var details = "";
-        var splitDetails = Pattern.compile("interpolatedMessage='(.*?)'").matcher(exception.getMessage());
-
-        while (splitDetails.find())
-            details += splitDetails.group(1);
-
-        var exceptionDetails = ExceptionDetails.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .title("Bad Request, Invalid input")
-                .details(details)
-                .developerMessage(exception.getMessage())
-                .build();
-
-        return new ResponseEntity<>(exceptionDetails, HttpStatus.BAD_REQUEST);
     }
 
 
