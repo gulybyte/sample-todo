@@ -2,6 +2,7 @@ package io.github.gulybyte.todo.repository;
 
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -21,7 +22,8 @@ public class TodoRepositoryExceptionsTest {
     private TodoRepository repository;
 
     @Test
-    void whenFindAllWithoutMarkDoneWithDoneTryeThenReturnListOfTodoEmpty() {
+    @DisplayName("When findAllWithoutMarkDoneNonPageable with done=true then return empty")
+    void findAllWithoutMarkDoneNonPageable() {
 
         var todoToBeSaved = TodoCreator.createTodoWithDoneTrue();
 
@@ -36,7 +38,8 @@ public class TodoRepositoryExceptionsTest {
 
 
     @Test
-    void whenFindAllWithMarkDoneWithDoneFalseThenReturnPageOfListOfTodoEmpty() {
+    @DisplayName("When findAllWithMarkDone with done=false then return empty")
+    void findAllWithMarkDone() {
 
         var todoToBeSaved = TodoCreator.createTodoWithDoneFalse();
 
