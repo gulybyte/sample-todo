@@ -22,7 +22,7 @@ public class TodoRepositoryExceptionsTest {
     private TodoRepository repository;
 
     @Test
-    @DisplayName("When findAllWithoutMarkDoneNonPageable with done=true then return empty")
+    @DisplayName("When findAllWithoutMarkDoneNonPageable() with done=true then return empty")
     void findAllWithoutMarkDoneNonPageable() {
 
         var todoToBeSaved = TodoCreator.createTodoWithDoneTrue();
@@ -38,7 +38,7 @@ public class TodoRepositoryExceptionsTest {
 
 
     @Test
-    @DisplayName("When findAllWithMarkDone with done=false then return empty")
+    @DisplayName("When findAllWithMarkDone() with done=false then return empty")
     void findAllWithMarkDone() {
 
         var todoToBeSaved = TodoCreator.createTodoWithDoneFalse();

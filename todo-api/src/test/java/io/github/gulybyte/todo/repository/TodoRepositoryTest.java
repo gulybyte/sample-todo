@@ -41,7 +41,7 @@ public class TodoRepositoryTest {
 
 
     @Test
-    @DisplayName("When findAllWithoutMarkDoneNonPageable with done=false then return not empty")
+    @DisplayName("When findAllWithoutMarkDoneNonPageable() with done=false then return not empty")
     void findAllWithoutMarkDoneNonPageable() {
 
         var todoToBeSaved = TodoCreator.createTodoWithDoneFalse();
@@ -58,7 +58,7 @@ public class TodoRepositoryTest {
 
 
     @Test
-    @DisplayName("When findAllWithMarkDone with done=true then return not empty")
+    @DisplayName("When findAllWithMarkDone() with done=true then return not empty")
     void findAllWithMarkDone() {
 
         var todoToBeSaved = TodoCreator.createTodoWithDoneTrue();
