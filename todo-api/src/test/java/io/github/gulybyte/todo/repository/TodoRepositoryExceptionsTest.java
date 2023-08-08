@@ -22,14 +22,14 @@ public class TodoRepositoryExceptionsTest {
     private TodoRepository repository;
 
     @Test
-    @DisplayName("When findAllWithoutMarkDoneNonPageable() with done=true then return empty")
-    void findAllWithoutMarkDoneNonPageable() {
+    @DisplayName("When findAllWithoutMarkDone() with done=true then return empty")
+    void findAllWithoutMarkDone() {
 
         var todoToBeSaved = TodoCreator.createTodoWithDoneTrue();
 
         this.repository.save(todoToBeSaved);
 
-        List<Todo> response = this.repository.findAllWithoutMarkDoneNonPageable();
+        List<Todo> response = this.repository.findAllWithoutMarkDone();
 
         assertNotNull(response);
         assertEquals(0, response.size());

@@ -17,7 +17,7 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
     @Query(value = "select c from Todo c"
                     + " where c.done = false"
                     + " order by orderTodo desc")
-	List<Todo> findAllWithoutMarkDoneNonPageable();
+	List<Todo> findAllWithoutMarkDone();
 
     @Query(value = "select c from Todo c where c.done = true")
 	Page<Todo> findAllWithMarkDone(Pageable pageable);

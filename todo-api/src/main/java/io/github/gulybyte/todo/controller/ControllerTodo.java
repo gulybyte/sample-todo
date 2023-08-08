@@ -44,7 +44,7 @@ public class ControllerTodo {
 
 	@GetMapping
 	public ResponseEntity<List<Todo>> findAllWithoutMarkDone(){
-		return ResponseEntity.ofNullable(service.findAllWithoutMarkDoneNonPageable());
+		return ResponseEntity.ofNullable(service.findAllWithoutMarkDone());
 	}
 
 

@@ -12,7 +12,7 @@ public interface ServiceTodo {
     Todo save(Todo todo);
     Todo updateDescription(UpdateDescriptionTodoPutRequestBodyFilter todoBody);
 
-	List<Todo> findAllWithoutMarkDoneNonPageable();
+	List<Todo> findAllWithoutMarkDone();
 	Page<Todo> findAllWithMarkDone(int pageNumber);
 
 	void deleteById(Long id);

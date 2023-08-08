@@ -45,9 +45,9 @@ public class ServiceTodoImpl implements ServiceTodo {
 
 
     @Override
-    public List<Todo> findAllWithoutMarkDoneNonPageable() {
-        return repository.findAllWithoutMarkDoneNonPageable().isEmpty() ? null
-            : repository.findAllWithoutMarkDoneNonPageable();
+    public List<Todo> findAllWithoutMarkDone() {
+        return repository.findAllWithoutMarkDone().isEmpty() ? null
+            : repository.findAllWithoutMarkDone();
     }
 
 

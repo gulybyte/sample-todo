@@ -41,14 +41,14 @@ public class TodoRepositoryTest {
 
 
     @Test
-    @DisplayName("When findAllWithoutMarkDoneNonPageable() with done=false then return not empty")
-    void findAllWithoutMarkDoneNonPageable() {
+    @DisplayName("When findAllWithoutMarkDone() with done=false then return not empty")
+    void findAllWithoutMarkDone() {
 
         var todoToBeSaved = TodoCreator.createTodoWithDoneFalse();
 
         this.repository.save(todoToBeSaved);
 
-        List<Todo> response = this.repository.findAllWithoutMarkDoneNonPageable();
+        List<Todo> response = this.repository.findAllWithoutMarkDone();
 
         assertNotNull(response);
         assertEquals(1, response.size());
