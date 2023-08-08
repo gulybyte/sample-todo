@@ -33,7 +33,8 @@ public class ServiceTodoImpl implements ServiceTodo {
 
     @Override @Transactional
     public Todo updateDescription(UpdateDescriptionTodoPutRequestBodyFilter todoBody) {
-        return repository.findById(todoBody.getId()).map(todo -> {
+        return repository.findById(todoBody.getId()).map(todo ->
+        {
             if (todo.getDescription().equals(todoBody.getDescription()))
                 throw new ConflictException("Feature description remains the same");
             todo.setDescription(todoBody.getDescription());
@@ -45,14 +46,16 @@ public class ServiceTodoImpl implements ServiceTodo {
 
     @Override
     public List<Todo> findAllWithoutMarkDoneNonPageable() {
-        return repository.findAllWithoutMarkDoneNonPageable().isEmpty() ? null : repository.findAllWithoutMarkDoneNonPageable();
+        return repository.findAllWithoutMarkDoneNonPageable().isEmpty() ? null
+            : repository.findAllWithoutMarkDoneNonPageable();
     }
 
 
     @Override
     public Page<Todo> findAllWithMarkDone(int pageNumber) {
 		var page = PageRequest.of(pageNumber, 5, Sort.Direction.DESC, "doneDate");
-        return repository.findAllWithMarkDone(page).isEmpty() ? null : repository.findAllWithMarkDone(page);
+        return repository.findAllWithMarkDone(page).isEmpty() ? null
+            : repository.findAllWithMarkDone(page);
     }
 
 
@@ -66,7 +69,8 @@ public class ServiceTodoImpl implements ServiceTodo {
 
     @Override
     public Todo markAsDone(Long id) {
-        return repository.findById(id).map(todo -> {
+        return repository.findById(id).map(todo ->
+        {
             if (todo.getDone())
                 throw new ConflictException("Todo is already mark as done");
             todo.setDone(true);
@@ -79,7 +83,8 @@ public class ServiceTodoImpl implements ServiceTodo {
 
     @Override
     public Todo undoneMarkAsDone(Long id) {
-        return repository.findById(id).map(todo -> {
+        return repository.findById(id).map(todo ->
+        {
             if (!todo.getDone())
                 throw new ConflictException("Todo not already mark as done yet");
             todo.setDone(false);
@@ -92,7 +97,8 @@ public class ServiceTodoImpl implements ServiceTodo {
 
     @Override
     public Todo changeOrderById(Long id) {
-        return repository.findById(id).map(todo -> {
+        return repository.findById(id).map(todo ->
+        {
             todo.setOrderTodo(LocalDateTime.now());
             return repository.save(todo);
         })
