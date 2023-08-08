@@ -64,19 +64,19 @@ public class ControllerTodo {
 
 	@PatchMapping("{id}/done")
 	public ResponseEntity<Todo> markAsDone(@PathVariable Long id) {
-		return ResponseEntity.ok().body(service.markAsDone(id));
+		return ResponseEntity.ok(service.markAsDone(id));
 	}
 
 
     @PatchMapping("{id}/undone")
     public ResponseEntity<Todo> undoneMarkAsDone(@PathVariable Long id) {
-        return ResponseEntity.ok().body(service.undoneMarkAsDone(id));
+        return ResponseEntity.ok(service.undoneMarkAsDone(id));
     }
 
 
     @PatchMapping("{id}/order")
 	public ResponseEntity<Todo> changeOrderById(@PathVariable Long id) {
-		return ResponseEntity.ok().body(service.changeOrderById(id));
+		return ResponseEntity.ok(service.changeOrderById(id));
 	}
 
 }
