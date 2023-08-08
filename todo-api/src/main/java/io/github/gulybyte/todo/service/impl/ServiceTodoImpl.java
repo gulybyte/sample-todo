@@ -10,7 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.gulybyte.todo.exception.status.BadRequestException;
+import io.github.gulybyte.todo.exception.status.ConflictException;
+import io.github.gulybyte.todo.exception.status.NotFoundException;
 import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.repository.TodoRepository;
 import io.github.gulybyte.todo.service.ServiceTodo;
@@ -43,7 +44,8 @@ public class ServiceTodoImpl implements ServiceTodo {
 
     @Override
     public void deleteById(Long id) {
-        if (!repository.existsById(id)) throw new BadRequestException("Todo Not Found!");
+        if (!repository.existsById(id))
+            throw new NotFoundException("Todo Not Found!");
         repository.deleteById(id);
     }
 
@@ -51,35 +53,46 @@ public class ServiceTodoImpl implements ServiceTodo {
     @Override
     public Todo markAsDone(Long id) {
         return repository.findById(id).map(todo -> {
+            if (todo.getDone())
+                throw new ConflictException("Todo is already mark as done");
             todo.setDone(true);
             todo.setDoneDate(LocalDateTime.now());
             return repository.save(todo);
-        }).orElse(null);
+        })
+        .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
     }
+
+
+    @Override
+    public Todo undoneMarkAsDone(Long id) {
+        return repository.findById(id).map(todo -> {
+            if (!todo.getDone())
+                throw new ConflictException("Todo not already mark as done yet");
+            todo.setDone(false);
+            todo.setDoneDate(null);
+            return repository.save(todo);
+        })
+        .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
+    }
+
 
     @Override
     public Todo changeOrderById(Long id) {
         return repository.findById(id).map(todo -> {
             todo.setOrderTodo(LocalDateTime.now());
             return repository.save(todo);
-        }).orElse(null);
+        })
+        .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
     }
 
-    @Override
-    public Todo undoneMarkAsDone(Long id) {
-        return repository.findById(id).map(todo -> {
-            todo.setDone(false);
-            todo.setDoneDate(null);
-            return repository.save(todo);
-        }).orElse(null);
-    }
 
     @Override
     public Todo updateDescriptionById(Long id, String description) {
         return repository.findById(id).map(todo -> {
             todo.setDescription(description);
             return repository.save(todo);
-        }).orElse(null);
+        })
+        .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
     }
 
 

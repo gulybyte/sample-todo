@@ -21,7 +21,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import io.github.gulybyte.todo.exception.ExceptionDetails;
 import io.github.gulybyte.todo.exception.FieldsExceptionDetails;
 import io.github.gulybyte.todo.exception.status.BadRequestException;
+import io.github.gulybyte.todo.exception.status.ConflictException;
+import io.github.gulybyte.todo.exception.status.NotFoundException;
 import io.github.gulybyte.todo.exception.status.details.BadRequestExceptionDetails;
+import io.github.gulybyte.todo.exception.status.details.ConflictExceptionDetails;
+import io.github.gulybyte.todo.exception.status.details.NotFoundExceptionDetails;
 import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
@@ -34,7 +38,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         var badRequestException = BadRequestExceptionDetails.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
-                .title("Bad Request, Invalid input")
+                .title("Bad Request, Invalid input.")
                 .details(bre.getMessage())
                 .developerMessage(bre.fillInStackTrace().toString())
                 .build();
@@ -42,8 +46,42 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(badRequestException, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<NotFoundExceptionDetails> handleNotFoundException(NotFoundException nfe)
+    {
+        var notFoundException = NotFoundExceptionDetails.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.NOT_FOUND.value())
+                .title("Resource Not Found.")
+                .details(nfe.getMessage())
+                .developerMessage(nfe.fillInStackTrace().toString())
+                .build();
+
+        System.out.println("teste de agora");
+
+        return new ResponseEntity<>(notFoundException, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<ConflictExceptionDetails> handleConflictException(ConflictException ce)
+    {
+        var conflictException = ConflictExceptionDetails.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.CONFLICT.value())
+                .title("Conflict with current state of the resource.")
+                .details(ce.getMessage())
+                .developerMessage(ce.fillInStackTrace().toString())
+                .build();
+
+        return new ResponseEntity<>(conflictException, HttpStatus.CONFLICT);
+    }
 
 
+
+
+
+
+    /* TIRAR ISSO QUANTO ANTES */
     @ExceptionHandler(ConstraintViolationException.class)// common exception in HttpMethod.PATCH
     public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException exception)
     {

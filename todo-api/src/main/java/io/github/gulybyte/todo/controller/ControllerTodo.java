@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.gulybyte.todo.model.Todo;
@@ -48,9 +49,9 @@ public class ControllerTodo {
 
 
 	@DeleteMapping("{id}")
-	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteById(@PathVariable Long id) {
         service.deleteById(id);
-        return ResponseEntity.noContent().build();
 	}
 
 
@@ -60,16 +61,17 @@ public class ControllerTodo {
 	}
 
 
+    @PatchMapping("{id}/undone")
+    public ResponseEntity<Todo> undoneMarkAsDone(@PathVariable Long id) {
+        return ResponseEntity.ok().body(service.undoneMarkAsDone(id));
+    }
+
+
     @PatchMapping("{id}/order")
 	public ResponseEntity<Todo> changeOrderById(@PathVariable Long id) {
 		return ResponseEntity.ok().body(service.changeOrderById(id));
 	}
 
-
-    @PatchMapping("{id}/undone")
-    public ResponseEntity<Todo> undoneMarkAsDone(@PathVariable Long id) {
-		return ResponseEntity.ok().body(service.undoneMarkAsDone(id));
-    }
 
     @PatchMapping("{id}/update-description")
     public ResponseEntity<Todo> updateDescriptionById(@PathVariable Long id,
