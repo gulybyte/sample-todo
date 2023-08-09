@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.gulybyte.todo.filter.body.UpdateDescriptionTodoPutRequestBodyFilter;
+import io.github.gulybyte.todo.filter.body.TodoPutFilter;
 import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.service.ServiceTodo;
 import jakarta.validation.Valid;
@@ -37,7 +37,7 @@ public class ControllerTodo {
 
 
     @PutMapping("update-description")
-    public ResponseEntity<Todo> updateDescription(@RequestBody @Valid UpdateDescriptionTodoPutRequestBodyFilter todoBody) {
+    public ResponseEntity<Todo> updateDescription(@RequestBody @Valid TodoPutFilter todoBody) {
         return ResponseEntity.ok(service.updateDescription(todoBody));
     }
 

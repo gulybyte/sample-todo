@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.github.gulybyte.todo.exception.status.ConflictException;
 import io.github.gulybyte.todo.exception.status.NotFoundException;
-import io.github.gulybyte.todo.filter.body.UpdateDescriptionTodoPutRequestBodyFilter;
+import io.github.gulybyte.todo.filter.body.TodoPutFilter;
 import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.repository.TodoRepository;
 import io.github.gulybyte.todo.service.ServiceTodo;
@@ -32,13 +32,12 @@ public class ServiceTodoImpl implements ServiceTodo {
 
 
     @Override @Transactional
-    public Todo updateDescription(UpdateDescriptionTodoPutRequestBodyFilter todoBody) {
-        var todoToSave = repository.findById(todoBody.getId()).map(todo ->
-        {
+    public Todo updateDescription(TodoPutFilter todoBody) {
+        var todoToSave = repository.findById(todoBody.getId()).map(todo -> {
             if (todo.getDescription().equals(todoBody.getDescription()))
                 throw new ConflictException("Feature description remains the same");
             todo.setDescription(todoBody.getDescription());
-            return repository.save(todo);
+            return todo;
         })
         .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
 
