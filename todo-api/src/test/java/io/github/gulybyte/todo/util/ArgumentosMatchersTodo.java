@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
+import io.github.gulybyte.todo.filter.body.TodoPutFilter;
 import io.github.gulybyte.todo.model.Todo;
 
 public class ArgumentosMatchersTodo {
@@ -40,6 +41,15 @@ public class ArgumentosMatchersTodo {
     }
     public static Page<Todo> anyPageTodo(Todo todo) {
         return new PageImpl<>(Collections.singletonList(todo));
+    }
+
+
+
+    public static TodoPutFilter anyTodoPutFilter() {
+        return TodoCreator.createTodoPutFilterDefault();
+    }
+    public static TodoPutFilter anyTodoPutFilter(TodoPutFilter TodoPutFilter) {
+        return TodoPutFilter;
     }
 
 }
