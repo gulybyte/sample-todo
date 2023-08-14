@@ -61,7 +61,7 @@ public class ServiceTodoImpl implements ServiceTodo {
 		var page = PageRequest.of(pageNumber, 5, Sort.Direction.DESC, "doneDate");
         var todo = repository.findAllWithMarkDone(page);
 
-        if (todo.isEmpty())
+        if (!todo.hasContent())
             throw new NotFoundException("Todo Not Found!");
 
         return todo;
