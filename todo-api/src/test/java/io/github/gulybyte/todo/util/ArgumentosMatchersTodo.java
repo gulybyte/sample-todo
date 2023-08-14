@@ -26,6 +26,9 @@ public class ArgumentosMatchersTodo {
     public static List<Todo> anyListTodo(Todo todo) {
         return List.of(todo);
     }
+    public static List<Todo> anyEmptyListTodo() {
+        return Collections.emptyList();
+    }
 
 
     public static Optional<Todo> anyOptionalTodo() {
@@ -34,6 +37,9 @@ public class ArgumentosMatchersTodo {
     public static Optional<Todo> anyOptionalTodo(Todo todo) {
         return Optional.of(todo);
     }
+    public static Optional<Todo> anyEmptyOptionalTodo() {
+        return Optional.empty();
+    }
 
 
     public static Page<Todo> anyPageTodo() {
@@ -41,6 +47,9 @@ public class ArgumentosMatchersTodo {
     }
     public static Page<Todo> anyPageTodo(Todo todo) {
         return new PageImpl<>(Collections.singletonList(todo));
+    }
+    public static Page<Todo> anyEmptyPageTodo() {
+        return Page.empty();
     }
 
 

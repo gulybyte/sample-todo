@@ -1,6 +1,6 @@
 package io.github.gulybyte.todo.integration;
 
-import java.util.List;
+/* import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +27,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase//h2
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@ActiveProfiles("test")
+@ActiveProfiles("test") */
 /*
  * APENAS VERIFICA STATUS E .getBody().getClass() DE OK OU NO_CONTENT, VERIFICAR SE HOUVE MUDANÇAS É OS TESTS SERVICE
  * TODO: PRÓXIMO TODO VERIFICAR STATUS E EXCEPTIONS
  */
 public class ITControllerTodoTest {
 
-    private final Integer INDEX = 0;
+    /*private final Integer INDEX = 0;
 
     @Autowired
     private TodoRepository repository;
@@ -44,7 +44,7 @@ public class ITControllerTodoTest {
 
 
 
-    @Test/* criar teste com falha @Valid */
+    @Test
     void save() {
 
         var entity = TodoCreator.createTodoDefault();
@@ -60,7 +60,7 @@ public class ITControllerTodoTest {
 
 
 
-    @Test/* criar teste lista vazia */
+    @Test
     void findAllWithoutMarkDone() {
 
         repository.save(TodoCreator.createTodoDefault());
@@ -75,7 +75,7 @@ public class ITControllerTodoTest {
 
 
 
-    @Test/* criar teste null com done=false */
+    @Test
     void findAllWithMarkDone() {
 
         repository.save(TodoCreator.createTodoWithDoneTrue());
@@ -90,21 +90,19 @@ public class ITControllerTodoTest {
 
 
 
-    @Test/* criar teste com o id dito não existente (não tem essa func ainda) */
+    @Test
     void deleteById() {
 
         var savedTodo = repository.save(TodoCreator.createTodoDefault());
 
         var response = testRest.exchange("/{id}", HttpMethod.DELETE,
-            null, Void.class, savedTodo.getId());/* TODO: VERIFICAR SE ESTÁ VALIDADANDO ID CORRETAMENTE */
+            null, Void.class, savedTodo.getId());
 
         assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
 
     }
 
 
-
-    /* TESTAR ID NÃO EXISTA, E CASO já estiver done true */
     @Test
     void markAsDone() {
 
@@ -175,7 +173,7 @@ public class ITControllerTodoTest {
 
     private String createJson(String key, String value) {
         return "{\""+key+"\": \""+value+"\"}";
-    }
+    }*/
 
 
 

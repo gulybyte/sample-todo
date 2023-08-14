@@ -86,7 +86,7 @@ class ServiceTodoTestSuccess {
 
         when(repository.findAllWithMarkDone(any())).thenReturn(anyPageTodo());
 
-        var response = service.findAllWithMarkDone(anyInt());
+        var response = service.findAllWithMarkDone(INDEX);
 
         assertEquals(response, repository.findAllWithMarkDone(any()));
 
