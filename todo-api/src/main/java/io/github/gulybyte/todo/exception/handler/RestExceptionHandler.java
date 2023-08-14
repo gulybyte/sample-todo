@@ -55,8 +55,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .developerMessage(nfe.fillInStackTrace().toString())
                 .build();
 
-        System.out.println("teste de agora");
-
         return new ResponseEntity<>(notFoundException, HttpStatus.NOT_FOUND);
     }
 
