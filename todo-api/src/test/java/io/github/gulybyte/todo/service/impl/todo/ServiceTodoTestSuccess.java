@@ -1,7 +1,6 @@
 package io.github.gulybyte.todo.service.impl.todo;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -39,7 +38,6 @@ class ServiceTodoTestSuccess {
 
 
     @Test
-    @DisplayName("When save() with success, then return repository and id=null and done=false")
     void save() {
 
         when(repository.save(todoParamCaptor.capture())).thenReturn(anyTodo());
@@ -56,7 +54,6 @@ class ServiceTodoTestSuccess {
 
 
     @Test
-    @DisplayName("When updateDescription() with success, then return repository and new description")
     void updateDescription() {
 
         when(repository.findById(anyLong())).thenReturn(anyOptionalTodo());
@@ -73,7 +70,6 @@ class ServiceTodoTestSuccess {
 
 
     @Test
-    @DisplayName("When findAllWithoutMarkDone() with success, then return repository")
     void findAllWithoutMarkDone() {
 
         when(repository.findAllWithoutMarkDone()).thenReturn(anyListTodo());
@@ -86,7 +82,6 @@ class ServiceTodoTestSuccess {
 
 
     @Test
-    @DisplayName("When findAllWithMarkDone() with success, then return repository")
     void findAllWithMarkDone() {
 
         when(repository.findAllWithMarkDone(any())).thenReturn(anyPageTodo());
@@ -99,7 +94,6 @@ class ServiceTodoTestSuccess {
 
 
     @Test
-    @DisplayName("When deleteById() with success, then have success")
     void deleteById() {
 
         when(repository.existsById(anyLong())).thenReturn(true);
@@ -114,7 +108,6 @@ class ServiceTodoTestSuccess {
 
 
     @Test
-    @DisplayName("When markAsDone() with success, then return repository and done=true and doneDate!=null")
     void markAsDone() {
 
         when(repository.findById(anyLong())).thenReturn(anyOptionalTodo(TodoCreator.createTodoWithDoneFalse()));
@@ -132,7 +125,6 @@ class ServiceTodoTestSuccess {
 
 
     @Test
-    @DisplayName("When undoneMarkAsDone() with success, then return repository and done=false and doneDate=null")
     void undoneMarkAsDone() {
 
         when(repository.findById(anyLong())).thenReturn(anyOptionalTodo(TodoCreator.createTodoWithDoneTrue()));
@@ -150,7 +142,6 @@ class ServiceTodoTestSuccess {
 
 
     @Test
-    @DisplayName("When changeOrderById() with success, then return repository and new orderTodo")
     void changeOrderById() {
 
         when(repository.findById(anyLong())).thenReturn(anyOptionalTodo());
