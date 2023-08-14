@@ -17,6 +17,8 @@ import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.repository.TodoRepository;
 import io.github.gulybyte.todo.service.ServiceTodo;
 
+import static io.github.gulybyte.todo.util.UniversalConstants.*;
+
 @Service
 public class ServiceTodoImpl implements ServiceTodo {
 
@@ -39,7 +41,7 @@ public class ServiceTodoImpl implements ServiceTodo {
             todo.setDescription(todoBody.getDescription());
             return todo;
         })
-        .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
+        .orElseThrow(() -> new NotFoundException(NOT_FOUND));
 
         return repository.save(todoToSave);
     }
@@ -50,7 +52,7 @@ public class ServiceTodoImpl implements ServiceTodo {
         var todo = repository.findAllWithoutMarkDone();
 
         if (todo.isEmpty())
-            throw new NotFoundException("Todo Not Found!");
+            throw new NotFoundException(NOT_FOUND);
 
         return todo;
     }
@@ -62,7 +64,7 @@ public class ServiceTodoImpl implements ServiceTodo {
         var todo = repository.findAllWithMarkDone(page);
 
         if (!todo.hasContent())
-            throw new NotFoundException("Todo Not Found!");
+            throw new NotFoundException(NOT_FOUND);
 
         return todo;
     }
@@ -71,7 +73,7 @@ public class ServiceTodoImpl implements ServiceTodo {
     @Override
     public void deleteById(Long id) {
         if (!repository.existsById(id))
-            throw new NotFoundException("Todo Not Found!");
+            throw new NotFoundException(NOT_FOUND);
         repository.deleteById(id);
     }
 
@@ -85,7 +87,7 @@ public class ServiceTodoImpl implements ServiceTodo {
             todo.setDoneDate(LocalDateTime.now());
             return todo;
         })
-        .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
+        .orElseThrow(() -> new NotFoundException(NOT_FOUND));
 
         return repository.save(todoToSave);
     }
@@ -100,7 +102,7 @@ public class ServiceTodoImpl implements ServiceTodo {
             todo.setDoneDate(null);
             return todo;
         })
-        .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
+        .orElseThrow(() -> new NotFoundException(NOT_FOUND));
 
         return repository.save(todoToSave);
     }
@@ -112,7 +114,7 @@ public class ServiceTodoImpl implements ServiceTodo {
             todo.setOrderTodo(LocalDateTime.now());
             return todo;
         })
-        .orElseThrow(() -> new NotFoundException("Todo Not Found!"));
+        .orElseThrow(() -> new NotFoundException(NOT_FOUND));
 
         return repository.save(todoToSave);
     }
