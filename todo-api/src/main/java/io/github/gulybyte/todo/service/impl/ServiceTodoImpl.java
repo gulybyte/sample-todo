@@ -47,16 +47,24 @@ public class ServiceTodoImpl implements ServiceTodo {
 
     @Override
     public List<Todo> findAllWithoutMarkDone() {
-        return repository.findAllWithoutMarkDone().isEmpty() ? null
-            : repository.findAllWithoutMarkDone();
+        var todo = repository.findAllWithoutMarkDone();
+
+        if (todo.isEmpty())
+            throw new NotFoundException("Todo Not Found!");
+
+        return todo;
     }
 
 
     @Override
     public Page<Todo> findAllWithMarkDone(int pageNumber) {
 		var page = PageRequest.of(pageNumber, 5, Sort.Direction.DESC, "doneDate");
-        return repository.findAllWithMarkDone(page).isEmpty() ? null
-            : repository.findAllWithMarkDone(page);
+        var todo = repository.findAllWithMarkDone(page);
+
+        if (todo.isEmpty())
+            throw new NotFoundException("Todo Not Found!");
+
+        return todo;
     }
 
 

@@ -44,14 +44,14 @@ public class ControllerTodo {
 
 	@GetMapping
 	public ResponseEntity<List<Todo>> findAllWithoutMarkDone(){
-		return ResponseEntity.ofNullable(service.findAllWithoutMarkDone());
+		return ResponseEntity.ok(service.findAllWithoutMarkDone());
 	}
 
 
 	@GetMapping("finalized")
 	public ResponseEntity<Page<Todo>> findAllWithMarkDone(
 			@RequestParam(value = "page", required = false, defaultValue = "0") int pageNumber) {
-		return ResponseEntity.ofNullable(service.findAllWithMarkDone(pageNumber));
+		return ResponseEntity.ok(service.findAllWithMarkDone(pageNumber));
 	}
 
 
