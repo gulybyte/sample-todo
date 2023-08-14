@@ -2,6 +2,7 @@ package io.github.gulybyte.todo.repository;
 
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -10,22 +11,21 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 
 import io.github.gulybyte.todo.model.Todo;
-import io.github.gulybyte.todo.repository.util.TodoCreator;
+import io.github.gulybyte.todo.util.TodoCreator;
+import static io.github.gulybyte.todo.util.ArgumentosMatchersTodo.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest// h2 enable
 //@ActiveProfiles("test")// disable flyway
-public class TodoRepositoryTest {
-
-    private final Integer INDEX = 0;
-
+public class TodoRepositoryTestSuccess {
 
     @Autowired
     private TodoRepository repository;
 
     @Test
-    void whenSaveWithCreateDateAndOrderTodoIsNullThenReturnCreateDateAndOrderTodoIsNotNull() {//testing beforeSave()
+    @DisplayName("Testing @PrePersist of Todo")
+    void beforeSave() {
 
         var todoToBeSaved = TodoCreator.createTodoWithCreateDateAndOrderTodoIsNull();
 
@@ -39,25 +39,25 @@ public class TodoRepositoryTest {
 
 
     @Test
-    void whenFindAllWithoutMarkDoneWithDoneFalseThenReturnListOfTodoNotEmpty() {
+    @DisplayName("When findAllWithoutMarkDone() with done=false then return not empty")
+    void findAllWithoutMarkDone() {
 
         var todoToBeSaved = TodoCreator.createTodoWithDoneFalse();
 
         this.repository.save(todoToBeSaved);
 
         List<Todo> response = this.repository.findAllWithoutMarkDone();
-        var responseObj = response.get(INDEX);
 
         assertNotNull(response);
         assertEquals(1, response.size());
-
-        assertEquals(responseObj.getDone(), false);
+        assertEquals(response.get(INDEX).getDone(), false);
 
     }
 
 
     @Test
-    void whenFindAllWithMarkDoneWithDoneTrueThenReturnPageOfListOfTodoNotEmpty() {
+    @DisplayName("When findAllWithMarkDone() with done=true then return not empty")
+    void findAllWithMarkDone() {
 
         var todoToBeSaved = TodoCreator.createTodoWithDoneTrue();
 
@@ -65,7 +65,7 @@ public class TodoRepositoryTest {
 
 		var page = PageRequest.of(0, 5, Sort.Direction.DESC, "doneDate");
 
-        Page<List<Todo>> response = repository.findAllWithMarkDone(page);
+        Page<Todo> response = repository.findAllWithMarkDone(page);
 
         assertEquals(1, response.getNumberOfElements());
 

@@ -2,6 +2,7 @@ package io.github.gulybyte.todo.repository;
 
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -10,18 +11,19 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 
 import io.github.gulybyte.todo.model.Todo;
-import io.github.gulybyte.todo.repository.util.TodoCreator;
+import io.github.gulybyte.todo.util.TodoCreator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class TodoRepositoryExceptionsTest {
+public class TodoRepositoryTestExceptions {
 
     @Autowired
     private TodoRepository repository;
 
     @Test
-    void whenFindAllWithoutMarkDoneWithDoneTryeThenReturnListOfTodoEmpty() {
+    @DisplayName("When findAllWithoutMarkDone() with done=true then return empty")
+    void findAllWithoutMarkDone() {
 
         var todoToBeSaved = TodoCreator.createTodoWithDoneTrue();
 
@@ -36,7 +38,8 @@ public class TodoRepositoryExceptionsTest {
 
 
     @Test
-    void whenFindAllWithMarkDoneWithDoneFalseThenReturnPageOfListOfTodoEmpty() {
+    @DisplayName("When findAllWithMarkDone() with done=false then return empty")
+    void findAllWithMarkDone() {
 
         var todoToBeSaved = TodoCreator.createTodoWithDoneFalse();
 
@@ -44,7 +47,7 @@ public class TodoRepositoryExceptionsTest {
 
         var page = PageRequest.of(0, 5, Sort.Direction.DESC, "doneDate");
 
-        Page<List<Todo>> response = repository.findAllWithMarkDone(page);
+        Page<Todo> response = repository.findAllWithMarkDone(page);
 
         assertEquals(0, response.getNumberOfElements());
 

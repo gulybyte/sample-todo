@@ -125,13 +125,13 @@ async function changeOrderById(id) {
 async function updateDescriptionById(id, description) {
   enableLoad();
 
-  const URL_UPDATE_DESCRIPTION = `${URL+id}/update-description`
+  const URL_UPDATE_DESCRIPTION = `${URL}update-description`
 
   await fetch(URL_UPDATE_DESCRIPTION,
   {
-    method: "PATCH",
+    method: "PUT",
     headers: HEADERS,
-    body: JSON.stringify({ 'description': description })
+    body: JSON.stringify({ 'id': id, 'description': description })
   })
 
   fetchData()

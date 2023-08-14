@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import io.github.gulybyte.todo.model.Todo;
 
 @Repository
+@org.springframework.transaction.annotation.Transactional
 public interface TodoRepository extends JpaRepository<Todo, Long> {
 
     @Query(value = "select c from Todo c"
@@ -19,7 +20,7 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
 	List<Todo> findAllWithoutMarkDone();
 
     @Query(value = "select c from Todo c where c.done = true")
-	Page<List<Todo>> findAllWithMarkDone(Pageable pageable);
+	Page<Todo> findAllWithMarkDone(Pageable pageable);
 
 
 }

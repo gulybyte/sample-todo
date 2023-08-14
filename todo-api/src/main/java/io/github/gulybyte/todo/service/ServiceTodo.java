@@ -4,20 +4,21 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import io.github.gulybyte.todo.filter.body.TodoPutFilter;
 import io.github.gulybyte.todo.model.Todo;
 
 public interface ServiceTodo {
 
     Todo save(Todo todo);
+    Todo updateDescription(TodoPutFilter todoBody);
 
 	List<Todo> findAllWithoutMarkDone();
-	Page<List<Todo>> findAllWithMarkDone(int pageNumber);
+	Page<Todo> findAllWithMarkDone(int pageNumber);
 
-	void deleteByIdWithMarkDone(Long id);
+	void deleteById(Long id);
 
 	Todo markAsDone(Long id);
-	Todo changeOrderById(Long id);
 	Todo undoneMarkAsDone(Long id);
-    Todo updateDescriptionById(Long id, String description);
+	Todo changeOrderById(Long id);
 
 }
