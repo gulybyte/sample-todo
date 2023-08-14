@@ -1,4 +1,4 @@
-package io.github.gulybyte.todo.service.impl;
+package io.github.gulybyte.todo.service.impl.todo;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.repository.TodoRepository;
+import io.github.gulybyte.todo.service.impl.ServiceTodoImpl;
 import io.github.gulybyte.todo.util.TodoCreator;
 import static io.github.gulybyte.todo.util.ArgumentosMatchersTodo.*;
 
