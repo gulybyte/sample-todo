@@ -16,7 +16,7 @@ import static io.github.gulybyte.todo.util.ArgumentosMatchersTodo.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest// h2 enable
+@DataJpaTest
 //@ActiveProfiles("test")// disable flyway
 public class TodoRepositoryTestSuccess {
 

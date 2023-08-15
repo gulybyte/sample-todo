@@ -49,7 +49,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
-const URL = 'http://localhost:5000/'
+const URL = 'http://localhost:8080/'
 const HEADERS = { 'Content-Type': 'application/json' }
 
 const description = ref('')
