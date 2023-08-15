@@ -6,12 +6,12 @@ cd todo-api
 
 compile:
 ```
-mvn clean package
+./gradlew build
 ```
 
 run:
 ```
-java -jar target/todo-1.jar
+java -jar build/libs/todo-1.jar
 ```
 
 # UI
