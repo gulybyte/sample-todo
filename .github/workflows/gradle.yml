@@ -4,11 +4,17 @@ on:
   push:
     paths:
       - 'todo-api/**'
-    branches: [ "master" ]
+    branches:
+      - 'master'
+      - 'releases/**'
+      - '!releases/**-no-verify'
   pull_request:
     paths:
         - 'todo-api/**'
-    branches: [ "master" ]
+    branches:
+      - 'master'
+      - 'releases/**'
+      - '!releases/**-no-verify'
 
 permissions:
   contents: read
