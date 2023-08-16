@@ -4,11 +4,19 @@ on:
   push:
     paths:
       - 'todo-api/**'
-    branches: [ "master" ]
+    branches:
+      - 'master'
+      - 'releases/**'
+      - '!releases/**-no-verify'
+      - '!**-no-verify'
   pull_request:
     paths:
         - 'todo-api/**'
-    branches: [ "master" ]
+    branches:
+      - 'master'
+      - 'releases/**'
+      - '!releases/**-no-verify'
+      - '!**-no-verify'
 
 permissions:
   contents: read
@@ -27,7 +35,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: Setup Gradle
-      uses: gradle/gradle-build-action@2.4.2
+      uses: gradle/gradle-build-action@2
       with:
        cache-disabled: true
        gradle-version: 8.1
