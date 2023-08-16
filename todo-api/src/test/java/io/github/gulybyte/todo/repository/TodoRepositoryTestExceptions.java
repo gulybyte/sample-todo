@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.data.domain.PageRequest;
 
 import io.github.gulybyte.todo.model.Todo;
@@ -16,6 +17,7 @@ import io.github.gulybyte.todo.util.TodoCreator;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
+@ActiveProfiles("test")
 public class TodoRepositoryTestExceptions {
 
     @Autowired
