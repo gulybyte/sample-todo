@@ -8,7 +8,7 @@ import io.github.gulybyte.todo.model.Todo;
 public class TodoCreator {
 
     private static final Long DEFAULT_LONG = 1L;
-    private static final String DEFAULT_STRING = "any String";
+    private static final String DEFAULT_STRING = "any String not emptry";
     private static final Boolean DEFAULT_BOOLEAN = null;
     private static final LocalDateTime DEFAULT_DATE = null;
 

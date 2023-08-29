@@ -1,19 +1,19 @@
 <template>
 
-  <h1 class="mb-05rem">Tarefas Anteriormente Concluidas</h1>
+  <h1 class="mb-05rem">Conclued todo's</h1>
 
-  <nav class="section-nav-report">
-    <RouterLink to="/report">Graficos</RouterLink>
-    <RouterLink to="/report/table">Tabela</RouterLink>
+  <nav class="section-nav-insight">
+    <RouterLink to="/insight">Frequency</RouterLink>
+    <RouterLink to="/insight/table">Table</RouterLink>
   </nav>
 
 </template>
 
 <style>
-.section-nav-report {
+.section-nav-insight {
   padding-bottom: 1rem;
 }
-.section-nav-report> a {
+.section-nav-insight> a {
     color: rgb(255, 90, 25);
     font-weight: bold;
     text-decoration: none;

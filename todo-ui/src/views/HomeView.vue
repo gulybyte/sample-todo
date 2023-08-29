@@ -11,13 +11,13 @@
     <div class="card">
       <DataTable :value="todos" tableStyle="min-width: 50rem" stripedRows editMode="cell" @cell-edit-complete="onCellEditComplete">
 
-        <Column field="createdDate" header="Data" sortable>
+        <Column field="createdDate" header="Date" sortable>
           <template #body="createdDate">
             {{ removeYear(createdDate.data.createdDate) }}
           </template>
         </Column>
 
-        <Column field="description" header="Descrição">
+        <Column field="description" header="Description">
           <template #body="description">
             {{ description.data.description }}
           </template>
@@ -58,8 +58,8 @@ var loading = ref(false)
 
 
 const columns = [
-  { field: 'id', header: 'Concluir' },
-  { field: 'orderTodo', header: 'Ordem' },
+  { field: 'id', header: 'Done' },
+  { field: 'orderTodo', header: 'Order' },
 ];
 
 

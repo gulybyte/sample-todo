@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import ReportView from '../views/ReportView.vue'
-import TableReportView from '../views/TableReportView.vue'
+import InsightView from '../views/InsightView.vue'
+import TableInsightView from '../views/TableInsightView.vue'
 
 
 const router = createRouter({
@@ -13,14 +13,14 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/report',
-      name: 'report',
-      component: ReportView
+      path: '/insight',
+      name: 'insight',
+      component: InsightView
     },
     {
-      path: '/report/table',
+      path: '/insight/table',
       name: 'table',
-      component: TableReportView
+      component: TableInsightView
     }
   ]
 })
