@@ -1,0 +1,40 @@
+name: Bug Reporting 🐞
+description: Report a Bug
+title: "[Bug]: "
+labels: ["BUG"]
+assignees:
+  - gulybyte
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. ❤️
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Which Bug? *
+      description: How to reproduce the problem?. Give as much significant detail (if possible send images.)
+      placeholder: What was expected and what happened, and how to replicate/reproduce!
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log/Stack this error
+      description: Copy and paste any relevant log/stack output. (This will be automatically formatted in code, so no backticks are needed.)
+      render: sh
+  - type: dropdown
+    id: Importance
+    attributes:
+      label: Importance
+      description: Select the degree of importance that must be taken so that it can be fixed as quickly as possible
+      multiple: false
+      options:
+        - Not important
+        - Important
+        - Very important
+        - Very Very important
+  - type: markdown
+    attributes:
+      value: |
+        Attention ⚠. By submitting this report you are agreeing to [code of conduct](https://github.com/gulybyte/sample-todo/blob/master/CODE_OF_CONDUCT.md).

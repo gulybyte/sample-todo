@@ -1,0 +1,23 @@
+name: 🚀🆕 Feature Request or Suggest
+description: Request an enhancement, suggestion, feature for this project.
+title: "[Suggestion or Feature]: "
+labels: ["Suggest or Enhancement"]
+assignees:
+  - gulybyte
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggestion for this project. ❤️
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Suggestion or Feature
+      description: What is your suggestion?, give as much significant detail.
+      placeholder: Speak categorically. Note that it has github markdown format, so add links, images whatever is needed.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Attention ⚠. By submitting this report you are agreeing to [code of conduct](https://github.com/gulybyte/sample-todo/blob/master/CODE_OF_CONDUCT.md).
