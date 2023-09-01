@@ -1,0 +1,23 @@
+name: ❓ Question or Support Request
+description: Ask a question/doubt or gain support publicly.
+title: "[Question]: "
+labels: ["Question"]
+assignees:
+  - gulybyte
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Take as many doubts as you want! ❤️
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Duvida
+      description: What is your doubt?, give as much significant detail.
+      placeholder: Speak categorically. Note that it has github markdown format, so add links, images whatever is needed.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Attention ⚠. By submitting this report you are agreeing to [code of conduct](https://github.com/gulybyte/sample-todo/blob/master/CODE_OF_CONDUCT.md).

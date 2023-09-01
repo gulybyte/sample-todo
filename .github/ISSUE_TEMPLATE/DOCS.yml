@@ -1,0 +1,23 @@
+name: 📚 Report documentation issue
+description: Report a problem in the project documentation or in the README.md file.
+title: "[Documentation]: "
+labels: ["documentation"]
+assignees:
+  - gulybyte
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a problem. ❤️
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Problem
+      description: What's the matter?, give as much significant detail.
+      placeholder: Put a clear and concise description here!
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Attention ⚠. By submitting this report you are agreeing to [code of conduct](https://github.com/gulybyte/sample-todo/blob/master/CODE_OF_CONDUCT.md).

@@ -1,9 +1,20 @@
+volumes:
+  postgres-data:
+
+networks:
+  backend:
+
+
 services:
   postgres:
-    image: 'postgres:latest'
+    image: 'postgres:15.2-alpine'
     environment:
       - 'POSTGRES_DB=todo-api'
       - 'POSTGRES_PASSWORD=postgres'
       - 'POSTGRES_USER=postgres'
     ports:
-      - '5432'
+      - '15432:5432'
+    networks:
+      - backend
+    volumes:
+      - postgres-data:/var/lib/postgresql/data

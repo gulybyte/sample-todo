@@ -2,7 +2,7 @@
   <div v-if="loading" class="loader-progress">
     <ProgressSpinner  />
   </div>
-  <HeaderReport></HeaderReport>
+  <HeaderInsight></HeaderInsight>
 
   <div class="card">
     <DataTable :value="todos.content" lazy paginator responsive @page="onPage($event)"
@@ -34,7 +34,7 @@
 
 
 <script setup>
-import HeaderReport from '../components/HeaderReport.vue'
+import HeaderInsight from '../components/HeaderInsight.vue'
 import { ref, onMounted } from 'vue';
 
 const URL = 'http://localhost:8080/'
@@ -43,11 +43,11 @@ const todos = ref([])
 var loading = ref(false)
 
 const columns = [
-  { field: 'description', header: 'Descrição' },
-  { field: 'createdDate', header: 'Data Criação' },
-  { field: 'doneDate', header: 'Data Finalização' },
-  { field: 'id', header: 'Deletar' },
-  { field: 'done', header: 'Desmarcar' },
+  { field: 'description', header: 'Description' },
+  { field: 'createdDate', header: 'Creation Date' },
+  { field: 'doneDate', header: 'Completion Date' },
+  { field: 'id', header: 'Delete' },
+  { field: 'done', header: 'Undone' },
 ];
 
 
