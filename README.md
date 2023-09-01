@@ -9,8 +9,8 @@
  - **Java**: LTS 17 OpenJDK
 
 # Run Project
-### [API (Backend)](/todo-api/)
-### [UI (Frontend)](/todo-ui/)
+### [API (Backend)](/todo-api/README.md)
+### [UI (Frontend)](/todo-ui/README.md)
 
 **open browser:**
 ```
@@ -19,7 +19,7 @@ http://localhost:5173/
 **Preview:**
 ![preview](/static/img/preview.webp)
 
-## Código de Conduta 🤝
+## Code Of Conduct 🤝
 [The way people are expected to behave in the context of this project.](/CODE_OF_CONDUCT.md)
 
 ## Contributing to the project 👥💪
@@ -38,4 +38,4 @@ http://localhost:5173/
 [Security policy.](https://github.com/gulybyte/sample-todo/security/policy)
 
 ## Licence
-[Creative Commons Legal Code (CC0 1.0 Universal)](/LICENSE)
+[Creative Commons Legal Code (CC0 1.0 Universal)](/LICENCE)
