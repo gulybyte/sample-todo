@@ -1,36 +1,41 @@
-# API
-open:
-```
-cd todo-api
-```
+# Sample Todo - Your Own Task Todo Manager
 
-compile:
-```
-./gradlew build
-```
+# Prerequisites
+![docker](https://img.shields.io/badge/Docker-2496ED.svg?style=for-the-badge&logo=Docker&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white) ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
-run:
-```
-java -jar build/libs/todo-1.jar
-```
+### Versions:
+ - **NodeJS**: LTS 18
+ - **NPM**: >= 9.8
+ - **Java**: LTS 17 OpenJDK
 
-# UI
-open:
-```
-cd todo-ui
-```
+# Run Project
+### [API (Backend)](/todo-api/)
+### [UI (Frontend)](/todo-ui/)
 
-compile:
-```
-npm i
-```
-
-run:
-```
-npm run dev
-```
-
-open browser:
+**open browser:**
 ```
 http://localhost:5173/
 ```
+**Preview:**
+![preview](/static/img/preview.webp)
+
+## Código de Conduta 🤝
+[The way people are expected to behave in the context of this project.](/CODE_OF_CONDUCT.md)
+
+## Contributing to the project 👥💪
+[How to contribute to the project.](/CONTRIBUTING.md)
+
+## Support 💁‍♂️
+[Open a Question issue.](https://github.com/gulybyte/sample-todo/issues/new/choose)
+
+<!-- ## Changes in the project. 🔄
+> [Explanatory history of the changes.(/LINK). >>in wiki githu<< -->
+
+## Maintainer's contact information. 📞
+[E-Mail gulybyte@gmail.com](mailto:gulybyte@gmail.com)
+
+## Security 🔒
+[Security policy.](https://github.com/gulybyte/sample-todo/security/policy)
+
+## Licence
+[Creative Commons Legal Code (CC0 1.0 Universal)](/LICENSE)
