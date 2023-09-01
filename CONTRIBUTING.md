@@ -34,9 +34,10 @@ We use GitHub issues to track public bugs. Report a bug by [opening a new issue]
 ## Code of Conduct
 Please read and adhere to our [Code of Conduct](/CODE_OF_CONDUCT.md). We aim to maintain a respectful and welcoming environment for all contributors.
 
-## Any contributions you make will be under the MIT Software License
-By contributing, you agree that your contributions will be licensed under its [MIT License](https://github.com/gulybyte/sample-todo/blob/main/LICENSE).
+## Any contributions you make will be under the Licence Creative Commons Legal Code (CC0 1.0 Universal)
+By contributing, you agree that your contributions will be licensed under its [Creative Commons Legal Code (CC0 1.0 Universal)](https://github.com/gulybyte/sample-todo/blob/main/LICENCE).
 
 # Contributors
 [gulybyte](https://github.com/gulybyte) maintainer project
-<a href="https://github.com/gulybyte/sample-todo/graphs/contributors"><img src="https://contributors-img.web.app/image?repo=gulybyte/sample-todo&max=500" alt="List of Contributors" width="100%"/></a>
+
+<a href="https://github.com/gulybyte/sample-todo/graphs/contributors"><img src="https://contributors-img.web.app/image?repo=gulybyte/sample-todo&max=500" alt="List of Contributors"/></a>
