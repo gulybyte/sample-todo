@@ -17,8 +17,10 @@
 ```
 http://localhost:5173/
 ```
-**Preview:**
-![preview](/static/img/preview.webp)
+<details>
+  <summary><h2>Preview</h2></summary>
+  <img src="/static/img/preview.webp"/>
+</details>
 
 ## Code Of Conduct 🤝
 [The way people are expected to behave in the context of this project.](/CODE_OF_CONDUCT.md)
