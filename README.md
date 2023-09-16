@@ -16,7 +16,7 @@
 ```
 http://localhost:5173/
 ```
-<details>
+<details open>
   <summary><h2>Preview</h2></summary>
   <img src="/static/img/preview.webp"/>
 </details>
