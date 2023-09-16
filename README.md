@@ -1,8 +1,4 @@
 # Sample Todo - Your Own Task Todo Manager
-<details>
-  <summary><h2>Preview</h2></summary>
-  <img src="/static/img/preview.webp"/>
-</details>
 
 # Prerequisites
 ![docker](https://img.shields.io/badge/Docker-2496ED.svg?style=for-the-badge&logo=Docker&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white) ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
@@ -16,10 +12,14 @@
 ### [API (Backend)](/todo-api/README.md)
 ### [UI (Frontend)](/todo-ui/README.md)
 
-**open browser:**
+#### open browser:
 ```
 http://localhost:5173/
 ```
+<details>
+  <summary><h2>Preview</h2></summary>
+  <img src="/static/img/preview.webp"/>
+</details>
 
 ## Code Of Conduct 🤝
 [The way people are expected to behave in the context of this project.](/CODE_OF_CONDUCT.md)
