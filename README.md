@@ -5,7 +5,7 @@
 
 ### Versions:
  - **NodeJS**: LTS 18
- - **NPM**: >= 9.8
+ - **NPM**:  ^9.8
  - **Java**: LTS 17 OpenJDK
 
 # Run Project
