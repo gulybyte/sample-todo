@@ -40,7 +40,7 @@ dependencies {
 
 	runtimeOnly 'org.postgresql:postgresql'
     //implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+	runtimeOnly 'org.springframework.boot:spring-boot-docker-compose'
 
 	testRuntimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
