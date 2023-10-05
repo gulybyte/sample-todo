@@ -6,7 +6,7 @@ cd todo-api
 ## Project Setup
 
 ```sh
-./gradlew install
+./gradlew i
 ```
 
 ### Run with Hot-Reload for Development
@@ -24,5 +24,5 @@ Don't worry about the database; Spring will automatically initialize it for you 
 
 **Run**:
 ```sh
-java -jar build/libs/todo-1.jar
+java -Dspring.profiles.active=build -jar build/libs/todo-1.jar
 ```
