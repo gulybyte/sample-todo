@@ -35,8 +35,12 @@ public class CorsFilter implements Filter {
         var allowDomains = todoProperty.getDomains().split(",");
         var allowOrigins = new HashSet<>(Arrays.asList(allowDomains));
 
-        if(allowOrigins.contains(origin)){
+        if(allowOrigins.contains("dev-mode")) {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+        } else if(allowOrigins.contains(origin)){
             response.setHeader("Access-Control-Allow-Origin", origin);
+        } else {
+            // TODO: exception
         }
 
         response.setHeader("Access-Control-Allow-Credentials", "true");
