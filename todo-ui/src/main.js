@@ -12,6 +12,8 @@ import Column from 'primevue/column';
 import ColumnGroup from 'primevue/columngroup';
 import Row from 'primevue/row';
 import ProgressSpinner from 'primevue/progressspinner';
+import Tag from 'primevue/tag';
+import Dialog from 'primevue/dialog';
 
 
 const app = createApp(App)
@@ -26,6 +28,9 @@ app.component('Column', Column)
 app.component('ColumnGroup', ColumnGroup)
 app.component('Row', Row)
 app.component('ProgressSpinner', ProgressSpinner)
+app.component('Tag', Tag)
+app.component('Dialog', Dialog)
+
 
 
 

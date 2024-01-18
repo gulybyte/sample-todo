@@ -5,12 +5,17 @@
 
 ### Versions:
  - **NodeJS**: LTS 18
- - **NPM**:  ^9.8
+ - **NPM**:  ^10.2
  - **Java**: LTS 17 OpenJDK
 
 # Run Project
-### [API (Backend)](/todo-api/README.md)
-### [UI (Frontend)](/todo-ui/README.md)
+### [Build API (Backend)](/todo-api/README.md)
+### [Build UI (Frontend)](/todo-ui/README.md)
+
+<!-- Run:
+```
+docker-compose -f "docker-compose.yml" up -d --build
+``` -->
 
 #### open browser:
 ```

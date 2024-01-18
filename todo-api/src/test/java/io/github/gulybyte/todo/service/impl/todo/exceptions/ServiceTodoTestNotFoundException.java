@@ -13,7 +13,7 @@ import io.github.gulybyte.todo.repository.TodoRepository;
 import io.github.gulybyte.todo.service.impl.ServiceTodoImpl;
 import io.github.gulybyte.todo.util.TodoCreator;
 
-import static io.github.gulybyte.todo.util.ArgumentosMatchersTodo.*;
+import static io.github.gulybyte.todo.util.ArgumentsMatchersTodo.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -40,7 +40,7 @@ class ServiceTodoTestNotFoundException {
         when(repository.findById(anyLong())).thenReturn(anyEmptyOptionalTodo());
 
         assertThrows(NotFoundException.class,
-            () -> service.updateDescription(anyTodoPutFilter(TodoCreator.createTodoPutFilterDefault())));
+            () -> service.updateDescription(anyTodoPutDescriptionFilter(TodoCreator.createTodoPutDescriptionFilterDefault())));
 
     }
 

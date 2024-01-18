@@ -1,4 +1,4 @@
-@import "primevue/resources/themes/lara-dark-purple/theme.css";
+@import "primevue/resources/themes/lara-dark-teal/theme.css";
 @import "primevue/resources/primevue.min.css";
 @import "primeflex/primeflex.css";
 @import "primeicons/primeicons.css";
@@ -10,7 +10,8 @@
 
 body {
   height: 100%;
-  background-image: url('image.webp');
+  background: rgb(6,13,21);
+  background: linear-gradient(142deg, rgba(6,13,21,1) 0%, rgba(32,10,79,1) 38%, rgba(47,8,112,1) 64%, rgba(111,0,255,1) 100%);
   background-size: 100%;
   background-attachment: fixed;
 }
@@ -19,6 +20,24 @@ body {
   margin-bottom: 0.5rem;
 }
 
-body::-webkit-scrollbar-track{background: #060D15  }
+.mr-05rem {
+  margin-right: 0.5rem;
+}
+
+.ml-05rem {
+  margin-left: 0.5rem;
+}
+
+.mt-05rem {
+  margin-top: 0.5rem;
+}
+
+*::placeholder {
+  font-weight: bold;
+  opacity: 0.5;
+  color: 060D15;
+}
+
+body::-webkit-scrollbar-track{background:  #060D15 }
 body::-webkit-scrollbar{width: 7px;}
-body::-webkit-scrollbar-thumb{ background-color: rgb(111, 0, 255) ; }
+body::-webkit-scrollbar-thumb{ background-color: rgba(111,0,255,1) ; }

@@ -7,10 +7,10 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
-import io.github.gulybyte.todo.filter.body.TodoPutFilter;
+import io.github.gulybyte.todo.filter.body.TodoPutDescriptionFilter;
 import io.github.gulybyte.todo.model.Todo;
 
-public class ArgumentosMatchersTodo {
+public class ArgumentsMatchersTodo {
 
     public static final Integer INDEX = 0;
 
@@ -54,11 +54,11 @@ public class ArgumentosMatchersTodo {
 
 
 
-    public static TodoPutFilter anyTodoPutFilter() {
-        return TodoCreator.createTodoPutFilterDefault();
+    public static TodoPutDescriptionFilter anyTodoPutDescriptionFilter() {
+        return TodoCreator.createTodoPutDescriptionFilterDefault();
     }
-    public static TodoPutFilter anyTodoPutFilter(TodoPutFilter TodoPutFilter) {
-        return TodoPutFilter;
+    public static TodoPutDescriptionFilter anyTodoPutDescriptionFilter(TodoPutDescriptionFilter TodoPutDescriptionFilter) {
+        return TodoPutDescriptionFilter;
     }
 
 }

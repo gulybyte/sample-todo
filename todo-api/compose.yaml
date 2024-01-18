@@ -1,13 +1,13 @@
 volumes:
-  postgres-data:
+  todo-api-volume-postgres:
 
 networks:
-  backend:
-
+  todo-api-network:
+    driver: bridge
 
 services:
   postgres:
-    image: 'postgres:15.2-alpine'
+    image: 'postgres:16.1-alpine'
     environment:
       - 'POSTGRES_DB=todo-api'
       - 'POSTGRES_PASSWORD=postgres'
@@ -15,6 +15,6 @@ services:
     ports:
       - '15432:5432'
     networks:
-      - backend
+      - todo-api-network
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - todo-api-volume-postgres:/var/lib/postgresql/data

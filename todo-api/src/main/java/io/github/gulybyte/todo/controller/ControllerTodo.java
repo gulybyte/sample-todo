@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.gulybyte.todo.filter.body.TodoPutFilter;
+import io.github.gulybyte.todo.filter.body.TodoPutContextFilter;
+import io.github.gulybyte.todo.filter.body.TodoPutDescriptionFilter;
 import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.service.ServiceTodo;
 import jakarta.validation.Valid;
@@ -37,10 +38,14 @@ public class ControllerTodo {
 
 
     @PutMapping("update-description")
-    public ResponseEntity<Todo> updateDescription(@RequestBody @Valid TodoPutFilter todoBody) {
+    public ResponseEntity<Todo> updateDescription(@RequestBody @Valid TodoPutDescriptionFilter todoBody) {
         return ResponseEntity.ok(service.updateDescription(todoBody));
     }
 
+    @PutMapping("update-context")
+    public ResponseEntity<Todo> updateContext(@RequestBody @Valid TodoPutContextFilter todoBody) {
+        return ResponseEntity.ok(service.updateContext(todoBody));
+    }
 
 	@GetMapping
 	public ResponseEntity<List<Todo>> findAllWithoutMarkDone(){

@@ -7,7 +7,7 @@ npm i
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+npm run dev -- --host --port=5173
 ```
 
 ### Compile and Minify for Production
@@ -19,5 +19,5 @@ npm run build
 ### Preview Build
 
 ```sh
-npm run preview
+npm run preview  -- --host --port=4173
 ```

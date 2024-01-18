@@ -2,7 +2,7 @@ package io.github.gulybyte.todo.util;
 
 import java.time.LocalDateTime;
 
-import io.github.gulybyte.todo.filter.body.TodoPutFilter;
+import io.github.gulybyte.todo.filter.body.TodoPutDescriptionFilter;
 import io.github.gulybyte.todo.model.Todo;
 
 public class TodoCreator {
@@ -53,15 +53,15 @@ public class TodoCreator {
                 .build();
     }
 
-    public static TodoPutFilter createTodoPutFilterDefault(){
-        return TodoPutFilter.builder()
+    public static TodoPutDescriptionFilter createTodoPutDescriptionFilterDefault(){
+        return TodoPutDescriptionFilter.builder()
                 .id(DEFAULT_LONG)
                 .description(DEFAULT_STRING)
                 .build();
     }
 
-    public static TodoPutFilter createTodoPutFilterWithNewDescription(){
-        return TodoPutFilter.builder()
+    public static TodoPutDescriptionFilter createTodoPutDescriptionFilterWithNewDescription(){
+        return TodoPutDescriptionFilter.builder()
                 .id(DEFAULT_LONG)
                 .description("new description")
                 .build();

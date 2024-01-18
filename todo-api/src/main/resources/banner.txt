@@ -7,3 +7,12 @@
      \/_//_/     \/_____/  \ \ \/  \/____/ \/_/\/_/    \/_____/ \/___/   \/___/   \/_/  \/____/ \/____/
                             \ \_\
                              \/_/
+
+Java: 17
+Dependency Management: Gradle - Groovy
+Spring Boot: 3.1.0
+
+GitHub: https://github.com/gulybyte/sample-todo
+Licence: Creative Commons Zero v1.0 Universal
+
+_________________________________________________________________________________________________________

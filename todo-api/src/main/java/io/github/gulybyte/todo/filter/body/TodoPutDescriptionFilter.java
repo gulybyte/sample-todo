@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Data @Builder
 @AllArgsConstructor @NoArgsConstructor
-public class TodoPutFilter {
+public class TodoPutDescriptionFilter {
 
     @NotNull(message = "Id cannot be null.")
     private Long id;
