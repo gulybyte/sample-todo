@@ -3,10 +3,12 @@
     <ProgressSpinner  />
   </div>
   <div>
-    <InputText v-model="description" type="text" style="width: 100%;" class="mb-05rem" />
+    <InputText v-model="description" placeholder="description" type="text" style="width: 100%;" class="mb-05rem mr-05rem" />
 
-    <Button label="Salvar" @click="postData" :disabled="description === ''"
+    <Button label="Salvar" @click="postData()" :disabled="description === ''"
       class="mb-05rem" style="margin-bottom: 0.5rem;"></Button>
+
+    <InputText v-model="contextTodo" placeholder="context (tag) for todo" type="text" class="mb-05rem ml-05rem" />
 
     <div class="card">
       <DataTable :value="todos" tableStyle="min-width: 50rem" stripedRows editMode="cell" @cell-edit-complete="onCellEditComplete">
@@ -18,8 +20,8 @@
         </Column>
 
         <Column field="description" header="Description">
-          <template #body="description">
-            {{ description.data.description }}
+          <template #body="rowData">
+            {{ rowData.data.description }}
           </template>
           <template #editor="{ data, field }">
             <InputText v-model="data[field]" autofocus style="width: 100%;" />
@@ -28,6 +30,13 @@
 
         <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header">
           <template #body="rowData">
+            <template v-if="col.field === 'contextTodo'">
+              <div @mouseover="modeContextTodoButton = true" @mouseleave="modeContextTodoButton = false">
+                <Tag v-show="!modeContextTodoButton" :value="rowData.data.contextTodo"></Tag>
+                <Button class="context-mode-button" v-show="modeContextTodoButton"
+                  @click="dialogContextTodoIsVisible = true ; dialogContextTodoId = rowData.data.id"><i class="pi pi-pencil"></i></Button>
+              </div>
+            </template>
             <template v-if="col.field === 'id'">
               <Button class="mark-done-button" @click="markAsDone(rowData.data.id)"><i class="pi pi-check"></i></Button>
             </template>
@@ -39,6 +48,15 @@
 
       </DataTable>
     </div>
+
+    <Dialog v-model:visible="dialogContextTodoIsVisible" header="Flex Scroll" :style="{ width: '75vw' }" maximizable modal>
+        <InputText v-model="contextTodoEdit" placeholder="Context" type="text" />
+        <template #footer>
+          <Button label="Salvar" @click="updateContextTodoById(dialogContextTodoId, contextTodoEdit)" :disabled="contextTodoEdit === ''"
+            class="mb-05rem" style="margin-bottom: 0.5rem;"></Button>
+        </template>
+    </Dialog>
+
   </div>
 </template>
 
@@ -53,11 +71,17 @@ const URL = 'http://localhost:8080/'
 const HEADERS = { 'Content-Type': 'application/json' }
 
 const description = ref('')
+const contextTodo = ref('')
 const todos = ref([])
 var loading = ref(false)
 
+const contextTodoEdit = ref('')
+var modeContextTodoButton = ref(false)
+var dialogContextTodoIsVisible = ref(false)
+var dialogContextTodoId = ref('')
 
 const columns = [
+  { field: 'contextTodo', header: 'Context' },
   { field: 'id', header: 'Done' },
   { field: 'orderTodo', header: 'Order' },
 ];
@@ -139,17 +163,39 @@ async function updateDescriptionById(id, description) {
 
 
 
+async function updateContextTodoById(id, context) {
+  enableLoad();
+
+  const URL_UPDATE_CONTEXT = `${URL}update-context`
+
+  await fetch(URL_UPDATE_CONTEXT,
+  {
+    method: "PUT",
+    headers: HEADERS,
+    body: JSON.stringify({ 'id': id, 'context': context })
+  })
+
+  contextTodoEdit.value = ''
+  dialogContextTodoIsVisible.value = false
+
+  fetchData()
+}
+
+
+
 async function postData() {
   enableLoad();
+
 
   await fetch(URL,
   {
     method: 'POST',
     headers: HEADERS,
-    body: JSON.stringify({ 'description': description.value })
+    body: JSON.stringify({ 'description': description.value, 'contextTodo': contextTodo.value })
   })
 
   description.value = ''
+  contextTodo.value = ''
 
   fetchData()
 }
@@ -158,11 +204,15 @@ onMounted(fetchData)
 </script>
 
 <style>
+
 .mark-done-button {
-  background-color: rgb(0, 38, 255);
+  background-color: rgb(116, 255, 41);
   border: none;
 } .change-order-button {
-  background-color: rgb(208, 255, 0);
+  background-color: rgb(85, 0, 255);
+  border: none;
+} .context-mode-button {
+  background-color: rgb(216, 255, 42);
   border: none;
 }
 </style>

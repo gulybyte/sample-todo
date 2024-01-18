@@ -4,7 +4,11 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.0'
 	id 'org.hibernate.orm' version '6.2.2.Final'
 	//id 'org.graalvm.buildtools.native' version '0.9.20'
+    //id 'pl.allegro.tech.build.axion-release' version '1.13.6'
+    //id 'com.palantir.docker' version '0.31.0'
 }
+
+//version = scmVersion.version
 
 group = 'io.github.gulybyte'
 version = '1'
@@ -59,4 +63,13 @@ hibernate {
 		associationManagement true
 	}
 }
+/*
+String imageName = "todo:$version"
 
+docker {
+    name imageName
+    files "build/libs/${bootJar.archiveFileName.get()}"
+    buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
+	dockerfile file("src/docker/Dockerfile")
+}
+ */

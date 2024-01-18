@@ -13,7 +13,7 @@ import org.springframework.data.domain.PageRequest;
 
 import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.util.TodoCreator;
-import static io.github.gulybyte.todo.util.ArgumentosMatchersTodo.*;
+import static io.github.gulybyte.todo.util.ArgumentsMatchersTodo.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

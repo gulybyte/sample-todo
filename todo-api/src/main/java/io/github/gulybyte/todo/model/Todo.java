@@ -32,8 +32,12 @@ public class Todo {
 
 	@Column
     @NotBlank(message = "The description cannot be blank.")
-    @Size(max = 350, message = "Description is too long (max: 350 characters).")
+    @Size(max = 350, message = "Your description is too long (max: 350 characters).")
 	private String description;
+
+    @Column
+    @Size(max = 20, message = "Your context of the todo is too long (max: 20 characters).")
+	private String contextTodo;
 
 	@Column
 	private Boolean done;
@@ -47,6 +51,8 @@ public class Todo {
         final var DATE_TIME_NOW = LocalDateTime.now();
 		setCreatedDate(DATE_TIME_NOW);
 		setOrderTodo(DATE_TIME_NOW);
+        if (getContextTodo() == null || getContextTodo() == "")
+            setContextTodo("none");
 	}
 
 
