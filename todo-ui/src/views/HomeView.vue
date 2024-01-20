@@ -34,7 +34,7 @@
               <div @mouseover="modeContextTodoButton = true" @mouseleave="modeContextTodoButton = false">
                 <Tag v-show="!modeContextTodoButton" :value="rowData.data.contextTodo"></Tag>
                 <Button class="context-mode-button" v-show="modeContextTodoButton"
-                  @click="dialogContextTodoIsVisible = true ; dialogContextTodoId = rowData.data.id"><i class="pi pi-pencil"></i></Button>
+                  @click="dialogContextTodoIsVisible = true ; dialogContextTodoId = rowData.data.id ; oldContextTodo = rowData.data.contextTodo"><i class="pi pi-pencil"></i></Button>
               </div>
             </template>
             <template v-if="col.field === 'id'">
@@ -49,11 +49,12 @@
       </DataTable>
     </div>
 
-    <Dialog v-model:visible="dialogContextTodoIsVisible" header="Flex Scroll" :style="{ width: '75vw' }" maximizable modal>
-        <InputText v-model="contextTodoEdit" placeholder="Context" type="text" />
+    <Dialog v-model:visible="dialogContextTodoIsVisible" header="Change Context of the todo" :style="{ width: '75vw' }" maximizable modal>
+        <InputText v-model="contextTodoEdit" :placeholder="oldContextTodo" type="text"  />
         <template #footer>
           <Button label="Salvar" @click="updateContextTodoById(dialogContextTodoId, contextTodoEdit)" :disabled="contextTodoEdit === ''"
             class="mb-05rem" style="margin-bottom: 0.5rem;"></Button>
+          <label style="color: gray;" class="block mb-2">Tip: use a short name without spaces, a simple identifier.</label>
         </template>
     </Dialog>
 
@@ -79,6 +80,7 @@ const contextTodoEdit = ref('')
 var modeContextTodoButton = ref(false)
 var dialogContextTodoIsVisible = ref(false)
 var dialogContextTodoId = ref('')
+var oldContextTodo = ref('')
 
 const columns = [
   { field: 'contextTodo', header: 'Context' },
