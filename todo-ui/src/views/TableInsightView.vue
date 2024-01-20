@@ -8,7 +8,6 @@
     <DataTable :value="todos.content" lazy paginator responsive @page="onPage($event)"
         :rows="todos.size" :totalRecords="todos.totalElements" tableStyle="min-width: 50rem">
       <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header">
-        <!-- esse bloco é inutil, porém nescessario graças ao button delete -->
         <template #body="rowData">
           <template v-if="col.field === 'description'">
             {{ rowData.data.description }}
