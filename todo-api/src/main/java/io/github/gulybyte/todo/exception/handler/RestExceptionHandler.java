@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -26,33 +25,32 @@ import io.github.gulybyte.todo.exception.status.details.BadRequestExceptionDetai
 import io.github.gulybyte.todo.exception.status.details.ConflictExceptionDetails;
 import io.github.gulybyte.todo.exception.status.details.NotFoundExceptionDetails;
 
-@ControllerAdvice
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<BadRequestExceptionDetails> handleBadRequestException(BadRequestException bre)
+    public ResponseEntity<BadRequestExceptionDetails> handleBadRequestException(BadRequestException ex)
     {
         var badRequestException = BadRequestExceptionDetails.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .title("Bad Request, Invalid input.")
-                .details(bre.getMessage())
-                .developerMessage(bre.fillInStackTrace().toString())
+                .details(ex.getMessage())
+                .developerMessage(ex.fillInStackTrace().toString())
                 .build();
 
         return new ResponseEntity<>(badRequestException, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<NotFoundExceptionDetails> handleNotFoundException(NotFoundException nfe)
+    public ResponseEntity<NotFoundExceptionDetails> handleNotFoundException(NotFoundException ex)
     {
         var notFoundException = NotFoundExceptionDetails.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.NOT_FOUND.value())
                 .title("Resource Not Found.")
-                .details(nfe.getMessage())
-                .developerMessage(nfe.fillInStackTrace().toString())
+                .details(ex.getMessage())
+                .developerMessage(ex.fillInStackTrace().toString())
                 .build();
 
         return new ResponseEntity<>(notFoundException, HttpStatus.NOT_FOUND);

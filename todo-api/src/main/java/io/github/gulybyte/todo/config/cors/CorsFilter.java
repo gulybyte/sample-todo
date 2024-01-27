@@ -16,7 +16,6 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 @Order(1)
 @Component
 public class CorsFilter implements Filter {
@@ -31,23 +30,27 @@ public class CorsFilter implements Filter {
         final HttpServletRequest request = (HttpServletRequest) req;
         final HttpServletResponse response = (HttpServletResponse) res;
 
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Content-Length, Authorization");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, PATCH");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Expose-Headers", "*");
+
         var origin = request.getHeader("Origin");
-        var allowDomains = todoProperty.getDomains().split(",");
-        var allowOrigins = new HashSet<>(Arrays.asList(allowDomains));
+
+        var allowOrigins = new HashSet<>(Arrays.asList(
+            todoProperty.getDomains().split(",")
+        ));
 
         if(allowOrigins.contains("dev-mode")) {
             response.setHeader("Access-Control-Allow-Origin", "*");
         } else if(allowOrigins.contains(origin)){
             response.setHeader("Access-Control-Allow-Origin", origin);
         } else {
-            // TODO: exception
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.getWriter().write("Access Denied!");
+            return;
         }
-
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Content-Length, Authorization");
-        response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, PATCH");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Expose-Headers", "*");
 
         filterChain.doFilter(request, response);
 
