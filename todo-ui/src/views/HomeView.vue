@@ -156,7 +156,7 @@ async function updateDescriptionById(id, description) {
 
   await fetch(URL_UPDATE_DESCRIPTION,
   {
-    method: "PUT",
+    method: "PATCH",
     headers: HEADERS,
     body: JSON.stringify({ 'id': id, 'description': description })
   })
@@ -173,7 +173,7 @@ async function updateContextTodoById(id, context) {
 
   await fetch(URL_UPDATE_CONTEXT,
   {
-    method: "PUT",
+    method: "PATCH",
     headers: HEADERS,
     body: JSON.stringify({ 'id': id, 'context': context })
   })
