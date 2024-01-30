@@ -4,19 +4,33 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
-import io.github.gulybyte.todo.filter.body.TodoPutDescriptionFilter;
+import io.github.gulybyte.todo.filter.body.TodoContextFilter;
+import io.github.gulybyte.todo.filter.body.TodoDescriptionFilter;
 import io.github.gulybyte.todo.model.Todo;
+import io.github.gulybyte.todo.util.wrapper.CustomPageDeserializer;
 
-public class ArgumentsMatchersTodo {
+public class ArgumentsMatchersTodo extends TodoCreator {
 
     public static final Integer INDEX = 0;
 
+    /* REPONSES TYPE */
+
+    public static final Class<? extends Object> ANY_RESPONSE_TYPE = new Object().getClass();
+    public static final Class<? extends Todo> TODO_RESPONSE_TYPE = new Todo().getClass();
+    public static final ParameterizedTypeReference<List<Todo>> LIST_RESPONSE_TYPE = new ParameterizedTypeReference<List<Todo>>() {};
+    public static final ParameterizedTypeReference<CustomPageDeserializer<Todo>> PAGE_RESPONSE_TYPE = new ParameterizedTypeReference<CustomPageDeserializer<Todo>>() {};
+
+
+
+
+    /* CREATE OBJECTS */
 
     public static Todo anyTodo() {
-        return TodoCreator.createTodoDefault();
+        return createTodoDefault();
     }
 
 
@@ -54,11 +68,17 @@ public class ArgumentsMatchersTodo {
 
 
 
-    public static TodoPutDescriptionFilter anyTodoPutDescriptionFilter() {
-        return TodoCreator.createTodoPutDescriptionFilterDefault();
+    public static TodoDescriptionFilter anyTodoDescriptionFilter() {
+        return createTodoDescriptionFilterDefault();
     }
-    public static TodoPutDescriptionFilter anyTodoPutDescriptionFilter(TodoPutDescriptionFilter TodoPutDescriptionFilter) {
-        return TodoPutDescriptionFilter;
+    public static TodoDescriptionFilter anyTodoDescriptionFilter(TodoDescriptionFilter TodoDescriptionFilter) {
+        return TodoDescriptionFilter;
     }
 
+    public static TodoContextFilter anyTodoContextFilter() {
+        return createTodoContextFilterDefault();
+    }
+    public static TodoContextFilter anyTodoContextFilter(TodoContextFilter TodoContextFilter) {
+        return TodoContextFilter;
+    }
 }

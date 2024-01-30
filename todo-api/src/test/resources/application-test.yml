@@ -1,4 +1,9 @@
+todoapi:
+  domains: dev-mode
+
 spring:
   flyway:
     enabled: false
-
+  sql:
+    init:
+      mode: always

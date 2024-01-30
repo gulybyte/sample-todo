@@ -1,4 +1,4 @@
-package io.github.gulybyte.todo.service.impl.todo;
+package io.github.gulybyte.todo.success;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,9 +20,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * THESE TESTS HAVE LOW RELEVANCE; INTEGRATION TESTS ENSURE SUCCESS CASES MORE APPROPRIATELY.
+ * IT IS POSSIBLE THAT THIS CLASS WILL CEASE TO EXIST SOON
+*/
+@Deprecated
 @DataJpaTest
 @ActiveProfiles("test")
-class ServiceTodoTestSuccess {
+class UnitTodoTestSuccess {
 
     @InjectMocks
     private ServiceTodoImpl service;
@@ -61,7 +66,7 @@ class ServiceTodoTestSuccess {
         when(repository.findById(anyLong())).thenReturn(anyOptionalTodo());
         when(repository.save(todoParamCaptor.capture())).thenReturn(anyTodo());
 
-        var response = service.updateDescription(anyTodoPutDescriptionFilter(TodoCreator.createTodoPutDescriptionFilterWithNewDescription()));
+        var response = service.updateDescription(anyTodoDescriptionFilter(TodoCreator.createTodoDescriptionFilterWithNewDescription()));
         var capturedParameterResponse = todoParamCaptor.getValue();
 
         assertEquals(response, repository.save(any()));
