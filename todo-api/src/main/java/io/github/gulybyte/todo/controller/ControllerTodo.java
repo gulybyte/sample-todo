@@ -52,7 +52,7 @@ public class ControllerTodo {
 	}
 
 
-	@GetMapping("finalized")
+	@GetMapping("todo-done")
 	public ResponseEntity<Page<Todo>> findAllWithMarkDone(
 			@RequestParam(value = "page", required = false, defaultValue = "0") int pageNumber) {
 		return ResponseEntity.ok(service.findAllWithMarkDone(pageNumber));
