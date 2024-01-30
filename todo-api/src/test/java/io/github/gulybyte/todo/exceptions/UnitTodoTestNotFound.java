@@ -1,4 +1,4 @@
-package io.github.gulybyte.todo.service.impl.todo.exceptions;
+package io.github.gulybyte.todo.exceptions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,9 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 import io.github.gulybyte.todo.exception.status.NotFoundException;
 import io.github.gulybyte.todo.repository.TodoRepository;
 import io.github.gulybyte.todo.service.impl.ServiceTodoImpl;
-import io.github.gulybyte.todo.util.TodoCreator;
-
-import static io.github.gulybyte.todo.util.ArgumentsMatchersTodo.*;
+import io.github.gulybyte.todo.util.ArgumentsMatchersTodo;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -21,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 @DataJpaTest
 @ActiveProfiles("test")
-class ServiceTodoTestNotFoundException {
+class UnitTodoTestNotFound extends ArgumentsMatchersTodo {
 
     @InjectMocks
     private ServiceTodoImpl service;
@@ -40,7 +38,18 @@ class ServiceTodoTestNotFoundException {
         when(repository.findById(anyLong())).thenReturn(anyEmptyOptionalTodo());
 
         assertThrows(NotFoundException.class,
-            () -> service.updateDescription(anyTodoPutDescriptionFilter(TodoCreator.createTodoPutDescriptionFilterDefault())));
+            () -> service.updateDescription(anyTodoDescriptionFilter(createTodoDescriptionFilterDefault())));
+
+    }
+
+
+    @Test
+    void updateContext() {
+
+        when(repository.findById(anyLong())).thenReturn(anyEmptyOptionalTodo());
+
+        assertThrows(NotFoundException.class,
+            () -> service.updateContext(anyTodoContextFilter(createTodoContextFilterDefault())));
 
     }
 

@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.github.gulybyte.todo.exception.status.ConflictException;
 import io.github.gulybyte.todo.exception.status.NotFoundException;
-import io.github.gulybyte.todo.filter.body.TodoPutContextFilter;
-import io.github.gulybyte.todo.filter.body.TodoPutDescriptionFilter;
+import io.github.gulybyte.todo.filter.body.TodoContextFilter;
+import io.github.gulybyte.todo.filter.body.TodoDescriptionFilter;
 import io.github.gulybyte.todo.model.Todo;
 import io.github.gulybyte.todo.repository.TodoRepository;
 import io.github.gulybyte.todo.service.ServiceTodo;
@@ -35,7 +35,7 @@ public class ServiceTodoImpl implements ServiceTodo {
 
 
     @Override @Transactional
-    public Todo updateDescription(TodoPutDescriptionFilter todoBody) {
+    public Todo updateDescription(TodoDescriptionFilter todoBody) {
         var todoToSave = repository.findById(todoBody.getId()).map(todo -> {
             if (todo.getDescription().equals(todoBody.getDescription()))
                 throw new ConflictException("Feature description remains the same");
@@ -49,7 +49,7 @@ public class ServiceTodoImpl implements ServiceTodo {
 
 
     @Override @Transactional
-    public Todo updateContext(TodoPutContextFilter todoBody) {
+    public Todo updateContext(TodoContextFilter todoBody) {
         var todoToSave = repository.findById(todoBody.getId()).map(todo -> {
             if (todo.getContextTodo().equals(todoBody.getContext()))
                 throw new ConflictException("Feature context remains the same");

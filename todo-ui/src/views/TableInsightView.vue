@@ -94,7 +94,7 @@ async function fetchData(page) {
 
   if(page === null || page === '' || page === undefined) page = 0
 
-  const response = await fetch(`${URL}finalized?page=${page}`)
+  const response = await fetch(`${URL}todo-done?page=${page}`)
 
   if (response.ok) todos.value = await response.json()
 

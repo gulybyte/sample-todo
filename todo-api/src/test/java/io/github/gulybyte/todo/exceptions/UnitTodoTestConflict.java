@@ -1,4 +1,4 @@
-package io.github.gulybyte.todo.service.impl.todo.exceptions;
+package io.github.gulybyte.todo.exceptions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,9 +11,8 @@ import org.springframework.test.context.ActiveProfiles;
 import io.github.gulybyte.todo.exception.status.ConflictException;
 import io.github.gulybyte.todo.repository.TodoRepository;
 import io.github.gulybyte.todo.service.impl.ServiceTodoImpl;
+import io.github.gulybyte.todo.util.ArgumentsMatchersTodo;
 import io.github.gulybyte.todo.util.TodoCreator;
-
-import static io.github.gulybyte.todo.util.ArgumentsMatchersTodo.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -21,7 +20,7 @@ import static org.mockito.Mockito.*;
 
 @DataJpaTest
 @ActiveProfiles("test")
-class ServiceTodoTestConflictException {
+class UnitTodoTestConflict extends ArgumentsMatchersTodo {
 
     @InjectMocks
     private ServiceTodoImpl service;
@@ -40,7 +39,18 @@ class ServiceTodoTestConflictException {
         when(repository.findById(anyLong())).thenReturn(anyOptionalTodo());
 
         assertThrows(ConflictException.class,
-            () -> service.updateDescription(anyTodoPutDescriptionFilter(TodoCreator.createTodoPutDescriptionFilterDefault())));
+            () -> service.updateDescription(anyTodoDescriptionFilter(createTodoDescriptionFilterDefault())));
+
+    }
+
+
+    @Test
+    void updateContext() {
+
+        when(repository.findById(anyLong())).thenReturn(anyOptionalTodo(createTodoWithDefaultContext()));
+
+        assertThrows(ConflictException.class,
+            () -> service.updateContext(anyTodoContextFilter(createTodoContextFilterDefault())));
 
     }
 
@@ -48,7 +58,7 @@ class ServiceTodoTestConflictException {
     @Test
     void markAsDone() {
 
-        when(repository.findById(anyLong())).thenReturn(anyOptionalTodo(TodoCreator.createTodoWithDoneTrue()));
+        when(repository.findById(anyLong())).thenReturn(anyOptionalTodo(createTodoWithDoneTrue()));
 
         assertThrows(ConflictException.class,
             () -> service.markAsDone(anyLong()));
@@ -59,7 +69,7 @@ class ServiceTodoTestConflictException {
     @Test
     void undoneMarkAsDone() {
 
-        when(repository.findById(anyLong())).thenReturn(anyOptionalTodo(TodoCreator.createTodoWithDoneFalse()));
+        when(repository.findById(anyLong())).thenReturn(anyOptionalTodo(createTodoWithDoneFalse()));
 
         assertThrows(ConflictException.class,
             () -> service.undoneMarkAsDone(anyLong()));
