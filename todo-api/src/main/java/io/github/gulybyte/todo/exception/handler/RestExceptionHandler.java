@@ -83,7 +83,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         String fields = fieldErrors.stream().map(FieldError::getField).collect(Collectors.joining(", "));
         String fieldsMessage = fieldErrors.stream().map(FieldError::getDefaultMessage)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(" "));
 
         var fieldExceptionDetails = FieldsExceptionDetails.builder()
                 .timestamp(LocalDateTime.now())

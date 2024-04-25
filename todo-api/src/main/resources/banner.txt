@@ -8,9 +8,9 @@
                             \ \_\
                              \/_/
 
-Java: 17
+Java: 21
 Dependency Management: Gradle - Groovy
-Spring Boot: 3.1.0
+Spring Boot: 3.2.4
 
 GitHub: https://github.com/gulybyte/sample-todo
 Licence: Creative Commons Zero v1.0 Universal
