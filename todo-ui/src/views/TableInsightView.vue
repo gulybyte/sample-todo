@@ -2,6 +2,9 @@
   <div v-if="loading" class="loader-progress">
     <ProgressSpinner  />
   </div>
+  <div class="card flex justify-content-center">
+    <Toast />
+  </div>
   <HeaderInsight></HeaderInsight>
 
   <div class="card">
@@ -36,7 +39,11 @@
 import HeaderInsight from '../components/HeaderInsight.vue'
 import { ref, onMounted } from 'vue';
 
-const URL = 'http://localhost:8080/'
+import * as fetchProtocol from "../service/httpFetchDataService.js";
+
+import { toastNotification } from "../service/toastNotificationService.js";
+import { useToast } from 'primevue/usetoast';
+const toast = useToast();
 
 const todos = ref([])
 var loading = ref(false)
@@ -68,11 +75,14 @@ async function enableLoad() {
 async function undoneMarkAsDone(id) {
   enableLoad();
 
-  const URL_DELETE_DATA = `${URL+id}/undone`
+  const response = await fetchProtocol.PATCH(`${id}/undone`)
 
-  await fetch(URL_DELETE_DATA, {method: "PATCH"})
+  if(response.isToast)
+    toastNotification(toast, response.obj.severity, response.obj.title, response.obj.body, response.obj.details)
+  else
+    fetchData()
 
-  fetchData()
+  disableLoad()
 }
 
 
@@ -80,9 +90,11 @@ async function undoneMarkAsDone(id) {
 async function deleteById(id) {
   enableLoad();
 
-  const URL_DELETE_DATA = `${URL+id}`
+  const response = await fetchProtocol.DELETE(`${id}`)
 
-  await fetch(URL_DELETE_DATA, {method: "DELETE"})
+  if(response != null)
+    if(response.isToast)
+      toastNotification(toast, response.obj.severity, response.obj.title, response.obj.body, response.obj.details)
 
   fetchData()
 }
@@ -94,12 +106,16 @@ async function fetchData(page) {
 
   if(page === null || page === '' || page === undefined) page = 0
 
-  const response = await fetch(`${URL}todo-done?page=${page}`)
+  const response = await fetchProtocol.GET(`todo-done?page=${page}`)
 
-  if (response.ok) todos.value = await response.json()
+  if(response.isToast)
+    toastNotification(toast, response.obj.severity, response.obj.title, response.obj.body, response.obj.details)
+  else
+    todos.value = response.obj
 
   disableLoad();
 }
+
 
 
 

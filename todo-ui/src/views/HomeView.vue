@@ -1,4 +1,7 @@
 <template>
+  <div class="card flex justify-content-center">
+    <Toast />
+  </div>
   <div v-if="loading" class="loader-progress">
     <ProgressSpinner  />
   </div>
@@ -60,17 +63,19 @@
 
 
   </div>
+
+
 </template>
-
-
-
 
 
 <script setup>
 import { ref, onMounted } from 'vue';
 
-const URL = 'http://localhost:8080/'
-const HEADERS = { 'Content-Type': 'application/json' }
+import * as fetchProtocol from "../service/httpFetchDataService.js";
+
+import { toastNotification } from "../service/toastNotificationService.js";
+import { useToast } from 'primevue/usetoast';
+const toast = useToast();
 
 const description = ref('')
 const contextTodo = ref('')
@@ -88,8 +93,6 @@ const columns = [
   { field: 'id', header: 'Done' },
   { field: 'orderTodo', header: 'Order' },
 ];
-
-
 
 function removeYear(value) {
   const [date, hours] = value.split(' ');
@@ -114,25 +117,18 @@ async function enableLoad() {
 }
 
 
-async function fetchData() {
-  enableLoad();
-  const response = await fetch(URL);
-  if (response.ok) {
-    todos.value = await response.json();
-  }
-  disableLoad();
-}
-
-
 
 async function markAsDone(id) {
   enableLoad();
 
-  const URL_DELETE_DATA = `${URL+id}/done`
+  const response = await fetchProtocol.PATCH(`${id}/done`)
 
-  await fetch(URL_DELETE_DATA, {method: "PATCH"})
+  if(response.isToast)
+    toastNotification(toast, response.obj.severity, response.obj.title, response.obj.body, response.obj.details)
+  else
+    fetchData()
 
-  fetchData()
+  disableLoad()
 }
 
 
@@ -140,11 +136,14 @@ async function markAsDone(id) {
 async function changeOrderById(id) {
   enableLoad();
 
-  const URL_ORDER_DATA = `${URL+id}/order`
+  const response = await fetchProtocol.PATCH(`${id}/order`)
 
-  await fetch(URL_ORDER_DATA, {method: "PATCH"})
+  if(response.isToast)
+    toastNotification(toast, response.obj.severity, response.obj.title, response.obj.body, response.obj.details)
+  else
+    fetchData()
 
-  fetchData()
+  disableLoad()
 }
 
 
@@ -152,16 +151,16 @@ async function changeOrderById(id) {
 async function updateDescriptionById(id, description) {
   enableLoad();
 
-  const URL_UPDATE_DESCRIPTION = `${URL}update-description`
+  const body = JSON.stringify({ 'id': id, 'description': description })
 
-  await fetch(URL_UPDATE_DESCRIPTION,
-  {
-    method: "PATCH",
-    headers: HEADERS,
-    body: JSON.stringify({ 'id': id, 'description': description })
-  })
+  const response = await fetchProtocol.PATCH(`update-description`, body)
 
-  fetchData()
+  if(response.isToast)
+    toastNotification(toast, response.obj.severity, response.obj.title, response.obj.body, response.obj.details)
+  else
+    fetchData()
+
+  disableLoad()
 }
 
 
@@ -169,19 +168,19 @@ async function updateDescriptionById(id, description) {
 async function updateContextTodoById(id, context) {
   enableLoad();
 
-  const URL_UPDATE_CONTEXT = `${URL}update-context`
+  const body = JSON.stringify({ 'id': id, 'context': context })
 
-  await fetch(URL_UPDATE_CONTEXT,
-  {
-    method: "PATCH",
-    headers: HEADERS,
-    body: JSON.stringify({ 'id': id, 'context': context })
-  })
+  const response = await fetchProtocol.PATCH(`update-context`, body)
 
   contextTodoEdit.value = ''
   dialogContextTodoIsVisible.value = false
 
-  fetchData()
+  if(response.isToast)
+    toastNotification(toast, response.obj.severity, response.obj.title, response.obj.body, response.obj.details)
+  else
+    fetchData()
+
+  disableLoad()
 }
 
 
@@ -189,21 +188,38 @@ async function updateContextTodoById(id, context) {
 async function postData() {
   enableLoad();
 
+  const body = JSON.stringify({ 'description': description.value, 'contextTodo': contextTodo.value })
 
-  await fetch(URL,
-  {
-    method: 'POST',
-    headers: HEADERS,
-    body: JSON.stringify({ 'description': description.value, 'contextTodo': contextTodo.value })
-  })
+  const response = await fetchProtocol.POST(``, body)
 
   description.value = ''
   contextTodo.value = ''
 
-  fetchData()
+  if(response.isToast)
+    toastNotification(toast, response.obj.severity, response.obj.title, response.obj.body, response.obj.details)
+  else
+    fetchData()
+
+  disableLoad()
+}
+
+
+
+async function fetchData() {
+  enableLoad();
+
+  const response = await fetchProtocol.GET(``)
+
+  if(response.isToast)
+    toastNotification(toast, response.obj.severity, response.obj.title, response.obj.body, response.obj.details)
+  else
+    todos.value = response.obj
+
+  disableLoad();
 }
 
 onMounted(fetchData)
+
 </script>
 
 <style>
