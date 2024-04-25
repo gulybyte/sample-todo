@@ -61,25 +61,25 @@ public class ControllerTodo {
 
 	@DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteById(@PathVariable Long id) {
+	public void deleteById(@PathVariable(name = "id") Long id) {
         service.deleteById(id);
 	}
 
 
 	@PatchMapping("{id}/done")
-	public ResponseEntity<Todo> markAsDone(@PathVariable Long id) {
+	public ResponseEntity<Todo> markAsDone(@PathVariable(name = "id") Long id) {
 		return ResponseEntity.ok(service.markAsDone(id));
 	}
 
 
     @PatchMapping("{id}/undone")
-    public ResponseEntity<Todo> undoneMarkAsDone(@PathVariable Long id) {
+    public ResponseEntity<Todo> undoneMarkAsDone(@PathVariable(name = "id") Long id) {
         return ResponseEntity.ok(service.undoneMarkAsDone(id));
     }
 
 
     @PatchMapping("{id}/order")
-	public ResponseEntity<Todo> changeOrderById(@PathVariable Long id) {
+	public ResponseEntity<Todo> changeOrderById(@PathVariable(name = "id") Long id) {
 		return ResponseEntity.ok(service.changeOrderById(id));
 	}
 
